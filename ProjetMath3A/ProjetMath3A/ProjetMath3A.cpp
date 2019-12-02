@@ -5,19 +5,18 @@
 #include <string>
 #include "Poly3.h"
 #include <stdlib.h>
+#include "Poly4.h"
 
 void solve3() {
 	std::cout << "Faite votre choix en tapant le numero :\n";
 	std::cout << "1_Cardan\n";
-	std::cout << "2_Viete\n";
-
 	std::cout << "4_Retour\n\n";
 
 }
 void solve4() {
 	std::cout << "Faite votre choix en tapant le numero :\n";
-	std::cout << "1_Cadran\n";
-	std::cout << "2_Newton\n";
+	std::cout << "1_Ferrari\n";
+	std::cout << "2_ \n";
 
 	std::cout << "4_Retour\n\n";
 
@@ -85,27 +84,7 @@ int main()
 					}
 
 				}
-				////////////////////// Viete /////////
-				else if (choix2 == "2") {
-					std::cout << "\nDonner l'equation :\n";
-					std::cout << "X^3 + aX^2 + b^X +c\n";
-					double a, b, c = 0;
-					std::cout << "a :\n";
-					std::cin >> a;
-					std::cout << "b :\n";
-					std::cin >> b;
-					std::cout << "c :\n";
-					std::cin >> c;
 
-
-
-					Poly3 poly3(a, b, c);
-					poly3.solveViete();
-				}
-				////////////////////// ---- /////////
-				else if(choix2 == "3"){
-					std::cout << "PAS ENCORE IMPLEMENTER\n";
-				}
 			}
 			else{
 				choix = "0"; //retour
@@ -116,8 +95,31 @@ int main()
 			solve4();
 			std::cin >> choix2;
 			if (choix2 != "4") {
-				if (choix2 == "1") {
-					std::cout << "PAS ENCORE IMPLEMENTER\n";
+				/////////////////////Ferrari
+				if (choix2 == "1") { 
+					std::cout << "\nDonner l'equation :\n";
+					std::cout << "aX^4 + bX^3+ cX^2 +dX +e\n";
+					double a, b, c, d, e = 0;
+					std::cout << "a :\n";
+					std::cin >> a;
+
+					while (a == 0) {
+						std::cout << "a doit pas etre 0, reprendre a :\n";
+						std::cin >> a;
+					}
+
+					std::cout << "b :\n";
+					std::cin >> b;
+					std::cout << "c :\n";
+					std::cin >> c;
+					std::cout << "d :\n";
+					std::cin >> d;
+					std::cout << "e :\n";
+					std::cin >> e;
+
+					Poly4 poly4(a, b, c, d,e);
+					poly4.ferrrari(); std::cout << "\nAUTRE METHODE\n";
+					poly4.methode2();
 				}
 				else if (choix2 == "2") {
 					std::cout << "PAS ENCORE IMPLEMENTER\n";

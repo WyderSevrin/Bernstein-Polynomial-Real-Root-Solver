@@ -6,20 +6,20 @@ class Poly3
 public:
 	Poly3(double a, double b, double c);
 	Poly3(double a, double b, double c, double d);
-	void solveViete();
 	void cardanI(); //Avec imaginaire
-	void cardan(); // sans imaginaire
+	void cardan(); // Sans imaginaire
 	double root3(double x);
 	double _root3(double x);
 
+	void getRacines(double racines[]);
 private:
 	double m_a;
 	double m_b;
 	double m_c;
 	double m_d;
 
-	double x1;
-	double x2;
-	double x3;
+
+
+	double m_racines[3];
 };
 

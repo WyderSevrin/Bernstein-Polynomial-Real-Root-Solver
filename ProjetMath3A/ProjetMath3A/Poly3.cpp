@@ -1,11 +1,12 @@
 #include "Poly3.h"
 #define	TwoPi  6.28318530717958648
-#define PI	   3,141592653589793
+#define PI	   3.141592653589793
 const double eps = 1e-14;
 // fonction pour avoir le signe d'un nombre (1 ou -1)
 template <typename T> int sgn(T val) {
 	return (T(0) < val) - (val < T(0));
 }
+
 Poly3::Poly3(double a, double b, double c) : 
 	m_a(a),
 	m_b(b),
@@ -19,8 +20,6 @@ Poly3::Poly3(double a, double b, double c, double d) :
 	m_d(d)
 {
 }
-
-
 
 void Poly3::cardanI()
 {
@@ -58,9 +57,6 @@ void Poly3::cardanI()
 		//"1 racine reelle:\n    x = " + x + "");
 		std::cout << "2 racines complexes:\n y = " << re << "-" << im << "i, z = " << re << "+" << im << "i" << std::endl;
 		//"2 racines complexes:\n" +"    y = " + re + "-" + im + "i , z  = " + re + "+" + im + "i");
-		
-		
-		
 
 	}
 
@@ -115,11 +111,13 @@ void Poly3::cardanI()
 
 void Poly3::cardan()
 {
-	// les variables utilisee //
-	double p, q, alf, det, u = 0;
+	// les variables utilisée //
+	double p, q, det, u = 0;
 
 	// les trois solutions avec le nombre de sol. //
-	double X1, X2, X3, nbr = 0;
+	double X1 = 0;
+	double X2 = 0;
+	double X3 = 0;
 
 	p = (m_c / m_a) - (pow(m_b, 2.0)) / (3.0 * pow(m_a, 2.0));
 	q = (2.0 * pow(m_b, 3.0)) / (27.0 * pow(m_a, 3.0)) - (m_b * m_c) / (3.0 * pow(m_a, 2.0)) + m_d / m_a;
@@ -133,11 +131,8 @@ void Poly3::cardan()
 		else
 		{
 			X1 = -m_b / (3.0 * m_a) + pow(-q, (1.0 / 3.0));
-		};
+		}
 		std::cout << "Une solution trouvee!\n\nX1 = " << X1;
-		nbr = 1;
-
-		return;
 	}
 	else
 	{
@@ -155,113 +150,50 @@ void Poly3::cardan()
 			else
 			{
 				u = -pow(-(-q * 0.5 + pow(det, 0.5)), (1. / 3.));
-			};
-
+			}
 			X1 = -m_b / (3.0 * m_a) + u - (p / (3. * u));
 			std::cout << "Une solution trouvee!\n\nX1 = " << X1;
-			return;
-		};
+		}
 		if (det == 0)
 		{
 			X1 = -m_b / (3. * m_a) + sgn(q) * pow((-p / 3.), 0.5);
-			X2 = -m_b / (3. * m_a) - 2*sgn(q) * pow((-p / 3.), 0.5);
+			X2 = -m_b / (3. * m_a) - 2.0*sgn(q) * pow((-p / 3.), 0.5);
 			std::cout << "Trois solutions trouvees dont une double!\n\nX1 et X2  = " << X1 <<" et "<< X1 << "\nX2 = " << X2;
-			return;
-		};
+		}
 		if (det < 0)
 		{
+			double r = sqrt(-p / 3.);
+			//double t = acos((-q)/(2*r));
+			//double t = ((-q) / (2 * r));
+			double vt = -(m_b) / (3. * m_a);
 
-			alf = 1. / 3. * acos(-q / 2. * pow(27. / (pow(-p, 3.)), 0.5));
+			double alf = 1. / 3. * acos(-q / 2. * pow(27. / (pow(-p, 3.)), 0.5));
 
-			X1 = -(m_b) / (3. * m_a) + 2. * sqrt(-p / 3.) * cos(alf);
-			X2 = -(m_b) / (3. * m_a) + 2. * sqrt(-p / 3.) * cos(alf + (2. * PI) / 3.);
-			X3 = -(m_b) / (3. * m_a) + 2. * sqrt(-p / 3.) * cos(alf + (4. * PI) / 3.);
+			X1 = vt + 2. * sqrt(-p / 3.) * cos(alf);
+			X2 = vt + 2. * sqrt(-p / 3.) * cos(alf+( 2. * PI) / 3.);
+			X3 = vt + 2. * sqrt(-p / 3.) * cos(alf+( 4. * PI) / 3.);
+
+
+			/* Autre méthode qui revient au même sans utiliser PI
+			double omega = acos(-q / (2 * sqrt(pow(-p, 3) / 27)));
+			X1 = vt + 2 * r * cos(omega / 3);
+			X2 = vt - r * cos(omega / 3) + sqrt(p*( pow(cos(omega/3),2) ) - p );
+			X3 = vt - r * cos(omega / 3) - sqrt(p * (pow(cos(omega / 3), 2)) - p);
+			*/
+
 			std::cout << "Trois solutions trouvees!\n\nX1 = " << X1 << "\nX2 = " << X2 << "\nX3 = " << X3;
-			return;
-		}
-	}
-
-}
-
 		
 
-
-void Poly3::solveViete()
-{
-	double a2 = m_a * m_a;
-	double q = (a2 - 3 * m_b) / 9;
-	double r = (m_a * (2 * a2 - 9 * m_b) + 27 * m_c) / 54;
-	// equation x^3 + q*x + r = 0
-	double r2 = r * r;
-	double q3 = q * q * q;
-	double A, B;
-	if (r2 <= (q3 + eps)) {//<<-- FIXED!
-		double t = r / sqrt(q3);
-		if (t < -1) t = -1;
-		if (t > 1) t = 1;
-		t = acos(t);
-		m_a /= 3; q = -2 * sqrt(q);
-		this->x1 = q * cos(t / 3) - m_a;
-		this->x2 = q * cos((t + TwoPi) / 3) - m_a;
-		this->x3 = q * cos((t - TwoPi) / 3) - m_a;
-		//return(3);
-	}
-	else {
-		//A =-pow(fabs(r)+sqrt(r2-q3),1./3); 
-		A = -root3(fabs(r) + sqrt(r2 - q3));
-		if (r < 0) A = -A;
-		B = (A == 0 ? 0 : B = q / A);
-
-		m_a /= 3;
-		this->x1 = (A + B) - m_a;
-		this->x2 = -0.5 * (A + B) - m_a;
-		this->x3 = 0.5 * sqrt(3.) * (A - B);
-		if (fabs(this->x3) < eps) {
-			this->x3 = this->x2; 
-			//return(2);
 		}
-		//return(1);
 	}
-
-	std::cout << "Les racines de l'equation :";
-	std::cout << "x1 : " << this->x1;
-	std::cout << "\nx2 : " << this->x2;
-	std::cout << "\nx3 : " << this->x3;
+	//permet de recuperer les racines pour des applications suivantes 
+	this->m_racines[0] = X1;
+	this->m_racines[1] = X2;
+	this->m_racines[2] = X3;
 }
 
-
-
-double Poly3::root3(double x)
+void Poly3::getRacines(double racines[])
 {
-	if (x > 0) return _root3(x); else
-		if (x < 0) return-_root3(-x); else
-			return 0.;
+	racines = this->m_racines;
 }
 
-double Poly3::_root3(double x)
-{
-	double s = 1.;
-	while (x < 1.)
-	{
-		x *= 8.;
-		s *= 0.5;
-	}
-	while (x > 8.)
-	{
-		x *= 0.125;
-		s *= 2.;
-	}
-	double r = 1.5;
-	r -= 1. / 3. * (r - x / (r * r));
-	r -= 1. / 3. * (r - x / (r * r));
-	r -= 1. / 3. * (r - x / (r * r));
-	r -= 1. / 3. * (r - x / (r * r));
-	r -= 1. / 3. * (r - x / (r * r));
-	r -= 1. / 3. * (r - x / (r * r));
-	return r * s;
-}
-
-inline int sgn(double)
-{
-	return 0;
-}
