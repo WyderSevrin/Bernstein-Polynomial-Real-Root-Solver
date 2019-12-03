@@ -118,8 +118,7 @@ int main()
 					std::cin >> e;
 
 					Poly4 poly4(a, b, c, d,e);
-					poly4.ferrrari(); std::cout << "\nAUTRE METHODE\n";
-					poly4.methode2();
+					poly4.ferrrari55(); 
 				}
 				else if (choix2 == "2") {
 					std::cout << "PAS ENCORE IMPLEMENTER\n";

@@ -121,7 +121,7 @@ void Poly3::cardan()
 
 	p = (m_c / m_a) - (pow(m_b, 2.0)) / (3.0 * pow(m_a, 2.0));
 	q = (2.0 * pow(m_b, 3.0)) / (27.0 * pow(m_a, 3.0)) - (m_b * m_c) / (3.0 * pow(m_a, 2.0)) + m_d / m_a;
-
+	//std::cout << "b/3a" << m_b / (3.0 * m_a) << std::endl;
 	if (p == 0)
 	{
 		if (sgn(q) == 1)
@@ -194,6 +194,9 @@ void Poly3::cardan()
 
 void Poly3::getRacines(double racines[])
 {
-	racines = this->m_racines;
+	for (int i = 0; i < 3;i++) {
+		racines[i] = this->m_racines[i];
+	}
+	//racines = this->m_racines;
 }
 

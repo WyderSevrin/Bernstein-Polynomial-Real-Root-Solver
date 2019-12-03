@@ -10,6 +10,9 @@ class Poly4
 
 public:
 	Poly4(double a, double b, double c, double d, double e);
+	void bicar(double a, double c);
+	void ferrrari55();
+	double sizetab(double tab[]);
 	void ferrrari();
 	void methode2();
 
