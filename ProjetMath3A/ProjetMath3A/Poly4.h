@@ -11,10 +11,8 @@ class Poly4
 public:
 	Poly4(double a, double b, double c, double d, double e);
 	void bicar(double a, double c);
-	void ferrrari55();
-	double sizetab(double tab[]);
 	void ferrrari();
-	void methode2();
+	double sizetab(double tab[]);
 
 private:
 	double m_a;
@@ -24,8 +22,5 @@ private:
 	double m_e;
 
 	double m_racines[4];
-
-
-	bool solveQuadraticDepreciate(double a, double b, double c, double& root);
 };
 

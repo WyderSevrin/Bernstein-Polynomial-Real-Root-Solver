@@ -21,93 +21,7 @@ Poly3::Poly3(double a, double b, double c, double d) :
 {
 }
 
-void Poly3::cardanI()
-{
-	double p = 0;
-	double q = 0;
-	double m, n, u, v, gDelta, theta = 0;
-	double x, y, z, re, im = 0;
-	double k = 0;
 
-	p = (m_c / m_a) - (pow(m_b, 2.0) / (3 * pow(m_a, 2.0)));
-	q = ((2 * pow(m_b, 3.0)) / (27 * pow(m_a, 3.0))) - ((m_b * m_c) / (3 * pow(m_a, 2.0))) + (m_d / m_a);
-	gDelta = 4 * pow(p, 3.0) + 27 * pow(q, 2.0);
-	//gDelta =pow(p, 3.0)/27 + pow(q, 2.0)/4;
-	m = ((-q) / 2) + (0.5) * sqrt(gDelta / 27);
-	n = ((-q) / 2) - (0.5) * sqrt(gDelta / 27);
-	u = pow(abs(m), 1.0 / 3);
-	v = pow(abs(n), 1.0 / 3);
-
-	if (gDelta > 0)
-	{
-		if (m < 0) {
-			u = -u;
-		}
-		if (n < 0) {
-			v = -v;
-		}
-		x = u + v;
-		x += (-m_b) / (3 * m_a);
-		//re = (-q) / 2;
-		re = (-x) / 2;
-		re += (-m_b) / (3 * m_a);
-		im = (sqrt(3) / 2) * (u - v);
-		
-		std::cout << "1 racine reelle:\n    x = " << x << std::endl;
-		//"1 racine reelle:\n    x = " + x + "");
-		std::cout << "2 racines complexes:\n y = " << re << "-" << im << "i, z = " << re << "+" << im << "i" << std::endl;
-		//"2 racines complexes:\n" +"    y = " + re + "-" + im + "i , z  = " + re + "+" + im + "i");
-
-	}
-
-
-	else if (gDelta == 0)
-	{
-
-		if (m_b == 0 && m_c == 0 && m_d == 0) {
-			//x = y = z = 0;
-			std::cout<<"1 racine reelle de multiplicite 3:\n"<<"x = y = z = 0 "<<std::endl;
-		}
-		else {
-			x = (3 * q) / p;
-			x += (-m_b) / (3 * m_a);
-			y = (-3 * q) / (2 * p);
-			y += (-m_b) / (3 * m_a);
-			if (q != 0 && p != 0) { //Cas trivial
-				std::cout << " 1 racine reelle simple : \n    x = " << x << std::endl;
-				std::cout << "1 racine reelle double:\n    y = z = " << y << std::endl;
-			}
-			else if (q == 0 && p == 0) {
-				std::cout << "Il y a une racine triple : " << "-1" << std::endl;
-			}
-		}
-
-	}
-	else
-	{
-		k = (3 * q) / ((2 * p) * sqrt((-p) / 3));
-		//theta = acos(k);
-		theta =acos(-q / 2. * pow(27. / (pow(-p, 3.)), 0.5));
-		x = 2 * sqrt((-p) / 3) * cos(theta / 3);
-		y = 2 * sqrt((-p) / 3.) * cos((theta + 2.*PI) / 3.);
-		z = 2 * sqrt((-p) / 3.) * cos((theta + 4.*PI) / 3.);
-
-		if (x > -1E-6 && x < 1E-6)
-			x = 0.0;
-		if (y > -1E-6 && y < 1E-6)
-			y = 0.0;
-		if (z > -1E-6 && z < 1E-6)
-			z = 0.0;
-
-		x += (-m_b) / (3 * m_a);
-		y += (-m_b) / (3 * m_a);
-		z += (-m_b) / (3 * m_a);
-		std::cout << "3 racines reelles:\n    x = " << x <<" , y = "<< y <<" , z = "<< z <<std::endl;
-
-	}
-
-
-}
 
 void Poly3::cardan()
 {
@@ -200,3 +114,90 @@ void Poly3::getRacines(double racines[])
 	//racines = this->m_racines;
 }
 
+void Poly3::cardanI()
+{
+	double p = 0;
+	double q = 0;
+	double m, n, u, v, gDelta, theta = 0;
+	double x, y, z, re, im = 0;
+	double k = 0;
+
+	p = (m_c / m_a) - (pow(m_b, 2.0) / (3 * pow(m_a, 2.0)));
+	q = ((2 * pow(m_b, 3.0)) / (27 * pow(m_a, 3.0))) - ((m_b * m_c) / (3 * pow(m_a, 2.0))) + (m_d / m_a);
+	gDelta = 4 * pow(p, 3.0) + 27 * pow(q, 2.0);
+	//gDelta =pow(p, 3.0)/27 + pow(q, 2.0)/4;
+	m = ((-q) / 2) + (0.5) * sqrt(gDelta / 27);
+	n = ((-q) / 2) - (0.5) * sqrt(gDelta / 27);
+	u = pow(abs(m), 1.0 / 3);
+	v = pow(abs(n), 1.0 / 3);
+
+	if (gDelta > 0)
+	{
+		if (m < 0) {
+			u = -u;
+		}
+		if (n < 0) {
+			v = -v;
+		}
+		x = u + v;
+		x += (-m_b) / (3 * m_a);
+		//re = (-q) / 2;
+		re = (-x) / 2;
+		re += (-m_b) / (3 * m_a);
+		im = (sqrt(3) / 2) * (u - v);
+
+		std::cout << "1 racine reelle:\n    x = " << x << std::endl;
+		//"1 racine reelle:\n    x = " + x + "");
+		std::cout << "2 racines complexes:\n y = " << re << "-" << im << "i, z = " << re << "+" << im << "i" << std::endl;
+		//"2 racines complexes:\n" +"    y = " + re + "-" + im + "i , z  = " + re + "+" + im + "i");
+
+	}
+
+
+	else if (gDelta == 0)
+	{
+
+		if (m_b == 0 && m_c == 0 && m_d == 0) {
+			//x = y = z = 0;
+			std::cout << "1 racine reelle de multiplicite 3:\n" << "x = y = z = 0 " << std::endl;
+		}
+		else {
+			x = (3 * q) / p;
+			x += (-m_b) / (3 * m_a);
+			y = (-3 * q) / (2 * p);
+			y += (-m_b) / (3 * m_a);
+			if (q != 0 && p != 0) { //Cas trivial
+				std::cout << " 1 racine reelle simple : \n    x = " << x << std::endl;
+				std::cout << "1 racine reelle double:\n    y = z = " << y << std::endl;
+			}
+			else if (q == 0 && p == 0) {
+				std::cout << "Il y a une racine triple : " << "-1" << std::endl;
+			}
+		}
+
+	}
+	else
+	{
+		k = (3 * q) / ((2 * p) * sqrt((-p) / 3));
+		//theta = acos(k);
+		theta = acos(-q / 2. * pow(27. / (pow(-p, 3.)), 0.5));
+		x = 2 * sqrt((-p) / 3) * cos(theta / 3);
+		y = 2 * sqrt((-p) / 3.) * cos((theta + 2. * PI) / 3.);
+		z = 2 * sqrt((-p) / 3.) * cos((theta + 4. * PI) / 3.);
+
+		if (x > -1E-6 && x < 1E-6)
+			x = 0.0;
+		if (y > -1E-6 && y < 1E-6)
+			y = 0.0;
+		if (z > -1E-6 && z < 1E-6)
+			z = 0.0;
+
+		x += (-m_b) / (3 * m_a);
+		y += (-m_b) / (3 * m_a);
+		z += (-m_b) / (3 * m_a);
+		std::cout << "3 racines reelles:\n    x = " << x << " , y = " << y << " , z = " << z << std::endl;
+
+	}
+
+
+}
