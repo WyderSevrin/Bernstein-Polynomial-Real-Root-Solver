@@ -92,3 +92,17 @@ Matrice multiply(Matrice const &mat1, Matrice const &mat2) //mat1*mat2
         return Matrice(0, 0);
     }
 }
+
+Matrice operator*(double fact, Matrice const &mat1)
+{
+    return factor(fact, mat1);
+}
+Matrice operator*(Matrice const &mat1, double fact)
+{
+    return factor(fact, mat1);
+}
+
+Matrice operator*(Matrice const &mat1, Matrice const &mat2)
+{
+    return multiply(mat1, mat2);
+}
