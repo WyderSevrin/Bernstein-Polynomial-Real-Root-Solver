@@ -20,7 +20,7 @@ public:
     int getline() const;
     int getcolumn() const;
 
-    Matrice(int m, int n);
+    Matrice(int m = 0, int n = 0);
 };
 
 Matrice factor(double fact, Matrice const &mat1);           //fact*mat1
