@@ -1,8 +1,79 @@
 #include "Bernstein.h"
 
-void rootfinder(double precision) {} //recurence!!//quick sort algo
+void Bernstein::rootfinder(Matrice &controlpoint, Interval interval, double precision) //recurence!!//quick sort algo
+{
 
-Bernstein::Bernstein(double a, double b, double c, double d, double e, double f) //deg 5
+    bool racine = false;
+    bool racinemultiple = false;
+    double coordYpointgauche = 0;
+    double coordYpointdroite = 0;
+    int compteur = 0;
+    double indice = 0.0;
+
+    //test racine et racine multiple genre  1 -1 1 -1 racine multiple et racine // + coorY des point// attention au 0
+
+    for (int i = 0; i < (controlpoint.getline() - 1); i++)
+    {
+
+        if (((controlpoint.getcell(i, 0) >= 0) && (controlpoint.getcell(i + 1, 0) <= 0)) || ((controlpoint.getcell(i, 0) <= 0) && (controlpoint.getcell(i + 1, 0) >= 0)))
+        {
+            racine = true;
+            coordYpointgauche = controlpoint.getcell(i, 0);
+            coordYpointdroite = controlpoint.getcell(i + 1, 0);
+            indice = double(i);
+            compteur++;
+        }
+    }
+    if (compteur > 1)
+    {
+        racinemultiple = true;
+    }
+    //
+    if (racine == true)
+    {
+
+        if ((interval.getdelta() >= precision) || (racinemultiple == true))
+        {
+            Matrice controlpointG = m_castelG * controlpoint;
+            Matrice controlpointD = m_castelD * controlpoint;
+            rootfinder(controlpointG, interval.castelgauche(), precision);
+            rootfinder(controlpointD, interval.casteldroite(), precision);
+        }
+        else
+        {
+            double coordXpointgauche = interval.getgauche() + ((indice * interval.getdelta()) / (controlpoint.getline() - 1)); //pb ici  soit formule soit indice en int
+            double coordXpointdroite = interval.getgauche() + (((indice + 1) * interval.getdelta()) / (controlpoint.getline() - 1));
+            double pente = (coordYpointdroite - coordYpointgauche) / (coordXpointdroite - coordXpointgauche);
+            double offset = coordYpointgauche - pente * coordXpointgauche;
+            double root = -1.0 * (offset / pente);
+            m_racine.push_back(root);
+        }
+    }
+}
+
+void Bernstein::root(double precision)
+{
+    if (precision > 0)
+    {
+        Matrice controlpoint = m_invm * m_coeff;
+        rootfinder(controlpoint, m_origin, precision);
+    }
+    else
+    {
+        std::cout << "erreur sur la valeur de la précision" << std::endl;
+    }
+}
+
+void Bernstein::showracine()
+{
+    std::cout << "il y a " << m_racine.size() << " racines" << std::endl;
+    for (unsigned int i = 0; i < m_racine.size(); i++)
+    {
+        std::cout << " racine " << i + 1 << " en " << m_racine[i] << " " << std::endl;
+    }
+}
+
+/*Bernstein::Bernstein(double a, double b, double c, double d, double e, double f) //deg 5
 {
 }
 Bernstein::Bernstein(double a, double b, double c, double d, double e) //deg 4
@@ -10,33 +81,19 @@ Bernstein::Bernstein(double a, double b, double c, double d, double e) //deg 4
 }
 Bernstein::Bernstein(double a, double b, double c, double d) //deg 3
 {
-}
+}*/
 Bernstein::Bernstein(double a, double b, double c) //deg 2
 {
     m_coeff = Matrice(3, 1);
+    m_castelG = Matrice(3, 3);
+    m_castelD = Matrice(3, 3);
     m_coeff.setmat(1, 1, c);
     m_coeff.setmat(2, 1, b);
     m_coeff.setmat(3, 1, a);
-    double intervalA = -1.0 * maxinterval(m_coeff); // a metre dans une classe
-    double intervalB = maxinterval(m_coeff);
+    double coeffmax = maxinterval(m_coeff);
+    m_origin = Interval(-1.0 * coeffmax, coeffmax);
     m_invm = Matrice(3, 3);
-    initinvmdeg2(intervalA, intervalB, m_invm);
+    initinvmdeg2(m_origin.getgauche(), m_origin.getdroite(), m_invm);
+    initcastelGdeg2(m_castelG);
+    initcastelDdeg2(m_castelD);
 }
-
-void initinvmdeg2(double a, double b, Matrice &invm)
-{
-    invm.setmat(1, 1, 2.0);
-    invm.setmat(2, 1, 2.0);
-    invm.setmat(3, 1, 2.0);
-
-    invm.setmat(1, 2, 2.0 * a);
-    invm.setmat(2, 2, a + b);
-    invm.setmat(3, 2, 2.0 * b);
-
-    invm.setmat(1, 3, 2.0 * a * a);
-    invm.setmat(2, 3, 2.0 * a * b);
-    invm.setmat(3, 3, 0.0 * b * b);
-
-    invm *(1.0 / 2.0);
-}
-

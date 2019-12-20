@@ -17,8 +17,10 @@ public:
     void setgauche(double g);
     void setdroite(double d);
 
+    void showinterval();
+
     Interval castelgauche();
-    Interval castetdroite();
+    Interval casteldroite();
 
     Interval(double g = 0.0, double d = 0.0);
 };

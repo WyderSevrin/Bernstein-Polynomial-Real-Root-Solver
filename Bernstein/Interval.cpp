@@ -26,11 +26,11 @@ void Interval::setdroite(double d)
 
 Interval Interval::castelgauche()
 {
-    return Interval(m_gauche, m_droite / 2.0);
+    return Interval(m_gauche, m_droite - (m_delta / 2.0));
 }
-Interval Interval::castetdroite()
+Interval Interval::casteldroite()
 {
-    return Interval(m_gauche / 2.0, m_droite);
+    return Interval(m_gauche + (m_delta / 2.0), m_droite);
 }
 
 Interval::Interval(double g, double d)
@@ -38,4 +38,9 @@ Interval::Interval(double g, double d)
     m_gauche = g;
     m_droite = d;
     m_delta = d - g;
+}
+
+void Interval::showinterval()
+{
+    std::cout << "[ " << m_gauche << " , " << m_droite << " ]" << std::endl;
 }
