@@ -8,6 +8,8 @@
 class Bernstein
 {
 private:
+    int m_iteration;
+    int m_maxiteration;
     Matrice m_invm;
     Matrice m_castelG;
     Matrice m_castelD;
@@ -19,10 +21,11 @@ private:
 public:
     void root(double precision);
     void showracine();
+    void setmaxiteration(int i);
 
-    /*Bernstein(double a, double b, double c, double d, double e, double f); //deg 5
-    Bernstein(double a, double b, double c, double d, double e);           //deg 4
-    Bernstein(double a, double b, double c, double d);                     //deg 3*/
+    /*Bernstein( double a,  double b,  double c,  double d,  double e,  double f); //deg 5
+    Bernstein( double a,  double b,  double c,  double d,  double e);           //deg 4
+    Bernstein( double a,  double b,  double c,  double d);                     //deg 3*/
     Bernstein(double a, double b, double c); //deg 2
 };
 

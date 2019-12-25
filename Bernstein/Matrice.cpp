@@ -106,3 +106,91 @@ Matrice operator*(Matrice const &mat1, Matrice const &mat2)
 {
     return multiply(mat1, mat2);
 }
+
+Matrice creationmatriceinf(Matrice matrice, int k, int i)
+{
+
+    Matrice nvmat(matrice.getline() - 1, matrice.getcolumn() - 1);
+
+    int compteurm = 0;
+    for (int m = 0; m < matrice.getline(); m++)
+    {
+
+        int compteurn = 0;
+        if (m != k)
+        {
+            for (int n = 0; n < matrice.getcolumn(); n++)
+            {
+                if (n != i)
+                {
+                    nvmat.setmat(compteurm + 1, compteurn + 1, matrice.getcell(m, n));
+                    compteurn++;
+                }
+            }
+            compteurm++;
+        }
+    }
+    return nvmat;
+}
+
+double determinant(Matrice matrice)
+{
+    if (matrice.getline() == 2 && matrice.getcolumn() == 2)
+    {
+        return ((matrice.getcell(0, 0) * matrice.getcell(1, 1)) - (matrice.getcell(1, 0) * matrice.getcell(0, 1)));
+    }
+    else
+    {
+        double determinantvalue = 0;
+        for (int k = 0; k < matrice.getline(); k++)
+        {
+            double coefficient = 0.0;
+
+            if (k % 2 == 0)
+            {
+                coefficient = 1.0;
+            }
+            else
+            {
+                coefficient = -1.0;
+            }
+            Matrice detmatrice = creationmatriceinf(matrice, k, 0);
+
+            determinantvalue += matrice.getmat()[k][0] * coefficient * determinant(detmatrice);
+        }
+        return determinantvalue;
+    }
+}
+
+double adjugate(Matrice matrice, int k, int i) // k = m ; i= n
+{
+    double coefficient = 0.0;
+    int exposant = k + i;
+
+    if (exposant % 2 == 0)
+    {
+        coefficient = 1.0;
+    }
+    else
+    {
+        coefficient = -1.0;
+    }
+
+    Matrice adjmatrice = creationmatriceinf(matrice, k, i);
+
+    return coefficient * determinant(adjmatrice);
+}
+
+Matrice inv(Matrice matrice)
+{
+    Matrice inv = matrice;
+    for (int m = 0; m < matrice.getline(); m++)
+    {
+
+        for (int n = 0; n < matrice.getcolumn(); n++)
+        {
+            inv.setmat(m + 1, n + 1, adjugate(matrice, m, n));
+        }
+    }
+    return inv * (1 / determinant(matrice));
+}

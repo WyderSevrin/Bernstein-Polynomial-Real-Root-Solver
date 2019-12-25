@@ -30,5 +30,9 @@ Matrice operator*(double fact, Matrice const &mat1); //fact*mat1
 Matrice operator*(Matrice const &mat1, double fact); //mat1*fact
 
 Matrice operator*(Matrice const &mat1, Matrice const &mat2); //mat1 * mat2
+Matrice creationmatriceinf(Matrice matrice, int k, int i);
+double determinant(Matrice matrice);
+double adjugate(Matrice matrice, int m, int n);
+Matrice inv(Matrice matrice);
 
 #endif

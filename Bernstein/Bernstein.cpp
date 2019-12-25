@@ -20,7 +20,7 @@ void Bernstein::rootfinder(Matrice &controlpoint, Interval interval, double prec
             racine = true;
             coordYpointgauche = controlpoint.getcell(i, 0);
             coordYpointdroite = controlpoint.getcell(i + 1, 0);
-            indice = double(i);
+            indice = i;
             compteur++;
         }
     }
@@ -29,11 +29,16 @@ void Bernstein::rootfinder(Matrice &controlpoint, Interval interval, double prec
         racinemultiple = true;
     }
     //
-    if (racine == true)
-    {
 
-        if ((interval.getdelta() >= precision) || (racinemultiple == true))
+    if (racine == true) //max iterator
+    {
+        /*std::cout << " holla " << std::endl;
+        controlpoint.showmat();
+        interval.showinterval();*/
+
+        if (((interval.getdelta() > precision) || (racinemultiple == true)) && (interval.getdelta() > 0.00000000001) && m_maxiteration > m_iteration) //si valeur des points de control trop elevé besoin de refaire la mat invm
         {
+            m_iteration++;
             Matrice controlpointG = m_castelG * controlpoint;
             Matrice controlpointD = m_castelD * controlpoint;
             rootfinder(controlpointG, interval.castelgauche(), precision);
@@ -69,21 +74,23 @@ void Bernstein::showracine()
     std::cout << "il y a " << m_racine.size() << " racines" << std::endl;
     for (unsigned int i = 0; i < m_racine.size(); i++)
     {
-        std::cout << " racine " << i + 1 << " en " << m_racine[i] << " " << std::endl;
+        std::cout << " racine " << i + 1 << " : " << m_racine[i] << " " << std::endl;
     }
 }
 
-/*Bernstein::Bernstein(double a, double b, double c, double d, double e, double f) //deg 5
+/*Bernstein::Bernstein( double a,  double b,  double c,  double d,  double e,  double f) //deg 5
 {
 }
-Bernstein::Bernstein(double a, double b, double c, double d, double e) //deg 4
+Bernstein::Bernstein( double a,  double b,  double c,  double d,  double e) //deg 4
 {
 }
-Bernstein::Bernstein(double a, double b, double c, double d) //deg 3
+Bernstein::Bernstein( double a,  double b,  double c,  double d) //deg 3
 {
 }*/
 Bernstein::Bernstein(double a, double b, double c) //deg 2
 {
+    m_maxiteration = 5000;
+    m_iteration = 0;
     m_coeff = Matrice(3, 1);
     m_castelG = Matrice(3, 3);
     m_castelD = Matrice(3, 3);
@@ -91,7 +98,7 @@ Bernstein::Bernstein(double a, double b, double c) //deg 2
     m_coeff.setmat(2, 1, b);
     m_coeff.setmat(3, 1, a);
     double coeffmax = maxinterval(m_coeff);
-    m_origin = Interval(-1.0 * coeffmax, coeffmax);
+    m_origin = Interval(-1.0 * coeffmax, coeffmax); // attention symetrie fait que des valeur sont egale a 0 et casse l'algo pour les racine //il faut diviser l'enssemble en 2 pour qu'il ny ai pas de sym
     m_invm = Matrice(3, 3);
     initinvmdeg2(m_origin.getgauche(), m_origin.getdroite(), m_invm);
     initcastelGdeg2(m_castelG);
