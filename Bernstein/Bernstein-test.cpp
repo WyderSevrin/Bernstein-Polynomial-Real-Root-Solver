@@ -3,9 +3,9 @@
 int main()
 {
 
-    Bernstein deg2(1000000000.0, 5.0, -8000000000.0);
-    deg2.root(0.0000001);
-    deg2.showracine();
+    Bernstein deg3(30000, 80, 1, -2);
+    deg3.root(0.01);
+    deg3.showracine();
 
     return 0;
 }

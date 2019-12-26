@@ -34,5 +34,6 @@ Matrice creationmatriceinf(Matrice matrice, int k, int i);
 double determinant(Matrice matrice);
 double adjugate(Matrice matrice, int m, int n);
 Matrice inv(Matrice matrice);
+Matrice transpose(Matrice matrice);
 
 #endif

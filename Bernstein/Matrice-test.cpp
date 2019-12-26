@@ -4,27 +4,19 @@ int main()
 {
     Matrice gog(2, 2);
     Matrice lop(2, 1);
-    Matrice sgd(4, 4);
+    Matrice sgd(3, 3);
 
-    sgd.setmat(1, 1, 1);
-    sgd.setmat(1, 2, 1);
-    sgd.setmat(1, 3, 1);
-    sgd.setmat(1, 4, -1);
+    sgd.setmat(1, 1, 3);
+    sgd.setmat(1, 2, 0);
+    sgd.setmat(1, 3, 2);
 
-    sgd.setmat(2, 1, 1);
-    sgd.setmat(2, 2, 1);
-    sgd.setmat(2, 3, -1);
-    sgd.setmat(2, 4, 1);
+    sgd.setmat(2, 1, 2);
+    sgd.setmat(2, 2, 0);
+    sgd.setmat(2, 3, -2);
 
-    sgd.setmat(3, 1, 1);
-    sgd.setmat(3, 2, -1);
+    sgd.setmat(3, 1, 0);
+    sgd.setmat(3, 2, 1);
     sgd.setmat(3, 3, 1);
-    sgd.setmat(3, 4, 1);
-
-    sgd.setmat(4, 1, -1);
-    sgd.setmat(4, 2, 1);
-    sgd.setmat(4, 3, 1);
-    sgd.setmat(4, 4, 1);
 
     gog.setmat(1, 1, 4);
     gog.setmat(1, 2, 6);

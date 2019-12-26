@@ -181,15 +181,34 @@ double adjugate(Matrice matrice, int k, int i) // k = m ; i= n
     return coefficient * determinant(adjmatrice);
 }
 
-Matrice inv(Matrice matrice)
+Matrice transpose(Matrice matrice)
 {
-    Matrice inv = matrice;
+    Matrice transp = matrice;
+
     for (int m = 0; m < matrice.getline(); m++)
     {
 
         for (int n = 0; n < matrice.getcolumn(); n++)
         {
-            inv.setmat(m + 1, n + 1, adjugate(matrice, m, n));
+            transp.setmat(m + 1, n + 1, matrice.getcell(n, m));
+        }
+    }
+
+    return transp;
+}
+
+Matrice inv(Matrice matrice)
+{
+    Matrice inv = matrice;
+    Matrice transp = transpose(matrice);
+
+    for (int m = 0; m < matrice.getline(); m++)
+    {
+
+        for (int n = 0; n < matrice.getcolumn(); n++)
+        {
+
+            inv.setmat(m + 1, n + 1, adjugate(transp, m, n));
         }
     }
     return inv * (1 / determinant(matrice));

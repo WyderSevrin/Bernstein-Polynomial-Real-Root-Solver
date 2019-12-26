@@ -1,6 +1,6 @@
 #include "Bernstein.h"
 
-void Bernstein::rootfinder(Matrice &controlpoint, Interval interval, double precision) //recurence!!//quick sort algo
+void Bernstein::rootfinder(Matrice controlpoint, Interval interval, double precision) //recurence!!//quick sort algo
 {
 
     bool racine = false;
@@ -60,8 +60,11 @@ void Bernstein::root(double precision)
 {
     if (precision > 0)
     {
-        Matrice controlpoint = m_invm * m_coeff;
-        rootfinder(controlpoint, m_origin, precision);
+        Matrice controlpointG = m_invmG * m_coeff;
+        rootfinder(controlpointG, m_originG, precision);
+
+        Matrice controlpointD = m_invmD * m_coeff;
+        rootfinder(controlpointD, m_originD, precision);
     }
     else
     {
@@ -89,18 +92,101 @@ Bernstein::Bernstein( double a,  double b,  double c,  double d) //deg 3
 }*/
 Bernstein::Bernstein(double a, double b, double c) //deg 2
 {
-    m_maxiteration = 5000;
+    m_maxiteration = 500;
     m_iteration = 0;
     m_coeff = Matrice(3, 1);
-    m_castelG = Matrice(3, 3);
-    m_castelD = Matrice(3, 3);
+    m_castelG = initcastelGdeg2();
+    m_castelD = initcastelDdeg2();
     m_coeff.setmat(1, 1, c);
     m_coeff.setmat(2, 1, b);
     m_coeff.setmat(3, 1, a);
     double coeffmax = maxinterval(m_coeff);
     m_origin = Interval(-1.0 * coeffmax, coeffmax); // attention symetrie fait que des valeur sont egale a 0 et casse l'algo pour les racine //il faut diviser l'enssemble en 2 pour qu'il ny ai pas de sym
-    m_invm = Matrice(3, 3);
-    initinvmdeg2(m_origin.getgauche(), m_origin.getdroite(), m_invm);
-    initcastelGdeg2(m_castelG);
-    initcastelDdeg2(m_castelD);
+    m_originG = Interval(m_origin.getgauche(), m_origin.castelgauche().getdroite());
+    m_originD = Interval(m_origin.casteldroite().getgauche(), m_origin.getdroite());
+
+    Matrice MG = initmdeg2(m_originG.getgauche(), m_originG.getdroite());
+    m_invmG = inv(MG);
+    Matrice MD = initmdeg2(m_originD.getgauche(), m_originD.getdroite());
+    m_invmD = inv(MD);
+}
+
+Bernstein::Bernstein(double a, double b, double c, double d)
+{
+
+    m_maxiteration = 250;
+    m_iteration = 0;
+
+    m_coeff = Matrice(4, 1);
+    m_coeff.setmat(1, 1, d);
+    m_coeff.setmat(2, 1, c);
+    m_coeff.setmat(3, 1, b);
+    m_coeff.setmat(4, 1, a);
+
+    m_castelG = initcastelGdeg3();
+    m_castelD = initcastelDdeg3();
+
+    double coeffmax = maxinterval(m_coeff);
+    m_origin = Interval(-1.0 * coeffmax, coeffmax);
+    m_originG = Interval(m_origin.getgauche(), m_origin.castelgauche().getdroite());
+    m_originD = Interval(m_origin.casteldroite().getgauche(), m_origin.getdroite());
+
+    Matrice MG = initmdeg3(m_originG.getgauche(), m_originG.getdroite());
+    m_invmG = inv(MG);
+    Matrice MD = initmdeg3(m_originD.getgauche(), m_originD.getdroite());
+    m_invmD = inv(MD);
+}
+
+Bernstein::Bernstein(double a, double b, double c, double d, double e)
+{
+
+    m_maxiteration = 500;
+    m_iteration = 0;
+
+    m_coeff = Matrice(5, 1);
+    m_coeff.setmat(1, 1, e);
+    m_coeff.setmat(2, 1, d);
+    m_coeff.setmat(3, 1, c);
+    m_coeff.setmat(4, 1, b);
+    m_coeff.setmat(5, 1, a);
+
+    m_castelG = initcastelGdeg4();
+    m_castelD = initcastelDdeg4();
+
+    double coeffmax = maxinterval(m_coeff);
+    m_origin = Interval(-1.0 * coeffmax, coeffmax);
+    m_originG = Interval(m_origin.getgauche(), m_origin.castelgauche().getdroite());
+    m_originD = Interval(m_origin.casteldroite().getgauche(), m_origin.getdroite());
+
+    Matrice MG = initmdeg4(m_originG.getgauche(), m_originG.getdroite()); // a test
+    m_invmG = inv(MG);
+    Matrice MD = initmdeg4(m_originD.getgauche(), m_originD.getdroite());
+    m_invmD = inv(MD);
+}
+
+Bernstein::Bernstein(double a, double b, double c, double d, double e, double f)
+{
+    m_maxiteration = 1000;
+    m_iteration = 0;
+
+    m_coeff = Matrice(5, 1);
+    m_coeff.setmat(1, 1, f);
+    m_coeff.setmat(2, 1, e);
+    m_coeff.setmat(3, 1, d);
+    m_coeff.setmat(4, 1, c);
+    m_coeff.setmat(5, 1, b);
+    m_coeff.setmat(6, 1, a);
+
+    m_castelG = initcastelGdeg5();
+    m_castelD = initcastelDdeg5();
+
+    double coeffmax = maxinterval(m_coeff);
+    m_origin = Interval(-1.0 * coeffmax, coeffmax);
+    m_originG = Interval(m_origin.getgauche(), m_origin.castelgauche().getdroite());
+    m_originD = Interval(m_origin.casteldroite().getgauche(), m_origin.getdroite());
+
+    Matrice MG = initmdeg5(m_originG.getgauche(), m_originG.getdroite()); // a test
+    m_invmG = inv(MG);
+    Matrice MD = initmdeg5(m_originD.getgauche(), m_originD.getdroite());
+    m_invmD = inv(MD);
 }

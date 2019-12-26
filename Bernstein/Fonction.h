@@ -6,10 +6,18 @@ double maxinterval(Matrice &coeff);
 
 double absolue(double a);
 
-void initinvmdeg2(double a, double b, Matrice &invm);
+Matrice initcastelGdeg2();
+Matrice initcastelDdeg2();
+Matrice initcastelGdeg3();
+Matrice initcastelDdeg3();
+Matrice initcastelGdeg4();
+Matrice initcastelDdeg4();
+Matrice initcastelGdeg5();
+Matrice initcastelDdeg5();
 
-void initcastelGdeg2(Matrice &castelg);
-
-void initcastelDdeg2(Matrice &casteld);
+Matrice initmdeg2(double a, double b);
+Matrice initmdeg3(double a, double b);
+Matrice initmdeg4(double a, double b);
+Matrice initmdeg5(double a, double b);
 
 #endif

@@ -26,132 +26,144 @@ double absolue(double a)
     }
 }
 
-void initinvmdeg2(double a, double b, Matrice &invm)
+Matrice initmdeg2(double a, double b)
 {
-    invm.setmat(1, 1, 2.0);
-    invm.setmat(2, 1, 2.0);
-    invm.setmat(3, 1, 2.0);
+    Matrice m(3, 3);
+    m.setmat(1, 1, b * b);
+    m.setmat(1, 2, -2.0 * b * a);
+    m.setmat(1, 3, a * a);
 
-    invm.setmat(1, 2, 2.0 * a);
-    invm.setmat(2, 2, a + b);
-    invm.setmat(3, 2, 2.0 * b);
+    m.setmat(2, 1, -2.0 * b);
+    m.setmat(2, 2, 2.0 * (a + b));
+    m.setmat(2, 3, -2.0 * a);
 
-    invm.setmat(1, 3, 2.0 * a * a);
-    invm.setmat(2, 3, 2.0 * a * b);
-    invm.setmat(3, 3, 2.0 * b * b);
+    m.setmat(3, 1, 1.0);
+    m.setmat(3, 2, -2.0);
+    m.setmat(3, 3, 1.00);
 
-    invm = invm * (1.0 / 2.0);
+    m = m * (1.0 / ((b - a) * (b - a)));
+    return m;
 }
 
-void initinvmdeg3(double a, double b, Matrice &invm)
+Matrice initmdeg3(double a, double b)
 {
-    invm.setmat(1, 1, 0.0);
-    invm.setmat(2, 1, 0.0);
-    invm.setmat(3, 1, 0.0);
-    invm.setmat(4, 1, 0.0);
+    Matrice m(4, 4);
+    m.setmat(1, 1, b * b * b);
+    m.setmat(2, 1, -3.0 * b * b);
+    m.setmat(3, 1, 3.0 * b);
+    m.setmat(4, 1, -1.0);
 
-    invm.setmat(1, 2, 0.0);
-    invm.setmat(2, 2, 0.0);
-    invm.setmat(3, 2, 0.0);
-    invm.setmat(4, 2, 0.0);
+    m.setmat(1, 2, -3.0 * b * b * a);
+    m.setmat(2, 2, 3.0 * b * b + 6.0 * b * a);
+    m.setmat(3, 2, -6.0 * b - 3.0 * a);
+    m.setmat(4, 2, 3.0);
 
-    invm.setmat(1, 3, 0.0);
-    invm.setmat(2, 3, 0.0);
-    invm.setmat(3, 3, 0.0);
-    invm.setmat(4, 3, 0.0);
+    m.setmat(1, 3, 3.0 * a * a * b);
+    m.setmat(2, 3, -3.0 * a * a - 6.0 * b * a);
+    m.setmat(3, 3, 3.0 * b + 6.0 * a);
+    m.setmat(4, 3, -3.0);
 
-    invm.setmat(1, 4, 0.0);
-    invm.setmat(2, 4, 0.0);
-    invm.setmat(3, 4, 0.0);
-    invm.setmat(4, 4, 0.0);
+    m.setmat(1, 4, -a * a * a);
+    m.setmat(2, 4, 3.0 * a * a);
+    m.setmat(3, 4, -3.0 * a);
+    m.setmat(4, 4, 1.0);
 
-    invm = invm * (1.0 / 2.0);
+    m = m * (1.0 / ((b - a) * (b - a) * (b - a)));
+    return m;
 }
 
-void initinvmdeg4(double a, double b, Matrice &invm)
+Matrice initmdeg4(double a, double b)
 {
-    invm.setmat(1, 1, 0.0);
-    invm.setmat(2, 1, 0.0);
-    invm.setmat(3, 1, 0.0);
-    invm.setmat(4, 1, 0.0);
-    invm.setmat(5, 1, 0.0);
+    Matrice m(5, 5);
+    m.setmat(1, 1, b * b * b * b);
+    m.setmat(2, 1, -4.0 * b * b * b);
+    m.setmat(3, 1, 6.0 * b * b);
+    m.setmat(4, 1, -4.0 * b);
+    m.setmat(5, 1, 1.0);
 
-    invm.setmat(1, 2, 0.0);
-    invm.setmat(2, 2, 0.0);
-    invm.setmat(3, 2, 0.0);
-    invm.setmat(4, 2, 0.0);
-    invm.setmat(5, 2, 0.0);
+    m.setmat(1, 2, -4.0 * a * b * b * b);
+    m.setmat(2, 2, 4.0 * b * b * b + 12.0 * a * b * b);
+    m.setmat(3, 2, -12.0 * b * b - 12.0 * a * b);
+    m.setmat(4, 2, 4.0 * a + 12 * b);
+    m.setmat(5, 2, -4.0);
 
-    invm.setmat(1, 3, 0.0);
-    invm.setmat(2, 3, 0.0);
-    invm.setmat(3, 3, 0.0);
-    invm.setmat(4, 3, 0.0);
-    invm.setmat(5, 3, 0.0);
+    m.setmat(1, 3, 6.0 * a * a * b * b);
+    m.setmat(2, 3, -12.0 * a * b * b - 12.0 * a * a * b);
+    m.setmat(3, 3, 6.0 * a * a + 6 * b * b + 12.0 * a * b);
+    m.setmat(4, 3, -12.0 * a - 12.0 * b);
+    m.setmat(5, 3, 6.0);
 
-    invm.setmat(1, 4, 0.0);
-    invm.setmat(2, 4, 0.0);
-    invm.setmat(3, 4, 0.0);
-    invm.setmat(4, 4, 0.0);
-    invm.setmat(5, 4, 0.0);
+    m.setmat(1, 4, -4.0 * a * a * a * b);
+    m.setmat(2, 4, 4.0 * a * a * a + 12.0 * a * a * b);
+    m.setmat(3, 4, -12.0 * a * a - 12.0 * a * b);
+    m.setmat(4, 4, 12.0 * a + 4.0 * b);
+    m.setmat(5, 4, -4.0);
 
-    invm.setmat(1, 5, 0.0);
-    invm.setmat(2, 5, 0.0);
-    invm.setmat(3, 5, 0.0);
-    invm.setmat(4, 5, 0.0);
-    invm.setmat(5, 5, 0.0);
+    m.setmat(1, 5, a * a * a * a);
+    m.setmat(2, 5, -4.0 * a * a * a);
+    m.setmat(3, 5, 6.0 * a * a);
+    m.setmat(4, 5, -4.0 * a);
+    m.setmat(5, 5, 1.0);
 
-    invm = invm * (1.0 / 2.0);
+    m = m * (1.0 / ((b - a) * (b - a) * (b - a) * (b - a)));
+
+    return m;
 }
 
-void initinvmdeg5(double a, double b, Matrice &invm)
+Matrice initmdeg5(double a, double b)
 {
-    invm.setmat(1, 1, 0.0);
-    invm.setmat(2, 1, 0.0);
-    invm.setmat(3, 1, 0.0);
-    invm.setmat(4, 1, 0.0);
-    invm.setmat(5, 1, 0.0);
-    invm.setmat(6, 1, 0.0);
+    Matrice m(6, 6);
+    m.setmat(1, 1, b * b * b * b * b);
+    m.setmat(2, 1, -5.0 * b * b * b * b);
+    m.setmat(3, 1, 10.0 * b * b * b);
+    m.setmat(4, 1, -10.0 * b * b);
+    m.setmat(5, 1, 5.0 * b);
+    m.setmat(6, 1, -1.0);
 
-    invm.setmat(1, 2, 0.0);
-    invm.setmat(2, 2, 0.0);
-    invm.setmat(3, 2, 0.0);
-    invm.setmat(4, 2, 0.0);
-    invm.setmat(5, 2, 0.0);
-    invm.setmat(6, 2, 0.0);
+    m.setmat(1, 2, -5.0 * a * b * b * b * b);
+    m.setmat(2, 2, 20.0 * a * b * b * b + 5.0 * b * b * b * b);
+    m.setmat(3, 2, -30.0 * a * b * b - 20.0 * b * b * b);
+    m.setmat(4, 2, 20.0 * a * b + 30.0 * b * b);
+    m.setmat(5, 2, -20.0 * b - 5.0 * a);
+    m.setmat(6, 2, 5.0);
 
-    invm.setmat(1, 3, 0.0);
-    invm.setmat(2, 3, 0.0);
-    invm.setmat(3, 3, 0.0);
-    invm.setmat(4, 3, 0.0);
-    invm.setmat(5, 3, 0.0);
-    invm.setmat(6, 3, 0.0);
+    m.setmat(1, 3, 10.0 * a * a * b * b * b);
+    m.setmat(2, 3, -30.0 * a * a * b * b - 20 * a * b * b * b);
+    m.setmat(3, 3, 30.0 * a * a * b + 60 * a * b * b + 10.0 * b * b * b);
+    m.setmat(4, 3, -10.0 * a * a - 60.0 * a * b - 30.0 * b * b);
+    m.setmat(5, 3, 20.0 * a + 30.0 * b);
+    m.setmat(6, 3, -10.0);
 
-    invm.setmat(1, 4, 0.0);
-    invm.setmat(2, 4, 0.0);
-    invm.setmat(3, 4, 0.0);
-    invm.setmat(4, 4, 0.0);
-    invm.setmat(5, 4, 0.0);
-    invm.setmat(6, 4, 0.0);
+    m.setmat(1, 4, -10.0 * a * a * a * b * b);
+    m.setmat(2, 4, 20.0 * a * a * a * b + 30.0 * a * a * b * b);
+    m.setmat(3, 4, -10.0 * a * a * a - 60.0 * a * a * b - 30.0 * a * b * b);
+    m.setmat(4, 4, 30.0 * a * a + 60 * a * b + 10.0 * b * b);
+    m.setmat(5, 4, -30.0 * a - 20.0 * b);
+    m.setmat(6, 4, 10.0);
 
-    invm.setmat(1, 5, 0.0);
-    invm.setmat(2, 5, 0.0);
-    invm.setmat(3, 5, 0.0);
-    invm.setmat(4, 5, 0.0);
-    invm.setmat(5, 5, 0.0);
-    invm.setmat(6, 5, 0.0);
+    m.setmat(1, 5, 5.0 * a * a * a * a * b);
+    m.setmat(2, 5, -5.0 * a * a * a * a - 20.0 * a * a * a * b);
+    m.setmat(3, 5, 20.0 * a * a * a + 30.0 * a * a * b);
+    m.setmat(4, 5, -30.0 * a * a - 20.0 * a * b);
+    m.setmat(5, 5, 20.0 * a + 5.0 * b);
+    m.setmat(6, 5, -5.0);
 
-    invm.setmat(1, 6, 0.0);
-    invm.setmat(2, 6, 0.0);
-    invm.setmat(3, 6, 0.0);
-    invm.setmat(4, 6, 0.0);
-    invm.setmat(5, 6, 0.0);
-    invm.setmat(6, 6, 0.0);
+    m.setmat(1, 6, -1.0 * a * a * a * a * a);
+    m.setmat(2, 6, 5.0 * a * a * a * a);
+    m.setmat(3, 6, -10.0 * a * a * a);
+    m.setmat(4, 6, 10.0 * a * a);
+    m.setmat(5, 6, -5.0 * a);
+    m.setmat(6, 6, 1.0);
 
-    invm = invm * (1.0 / 2.0);
+    m = m * (1.0 / ((b - a) * (b - a) * (b - a) * (b - a) * (b - a)));
+
+    return m;
 }
 
-void initcastelGdeg2(Matrice &castelg)
+Matrice initcastelGdeg2()
 {
+
+    Matrice castelg(3, 3);
     castelg.setmat(1, 1, 1.0);
     castelg.setmat(1, 2, 0.0);
     castelg.setmat(1, 3, 0.0);
@@ -163,10 +175,12 @@ void initcastelGdeg2(Matrice &castelg)
     castelg.setmat(3, 1, 0.25);
     castelg.setmat(3, 2, 0.5);
     castelg.setmat(3, 3, 0.25);
+    return castelg;
 }
 
-void initcastelDdeg2(Matrice &casteld)
+Matrice initcastelDdeg2()
 {
+    Matrice casteld(3, 3);
     casteld.setmat(1, 1, 0.25);
     casteld.setmat(1, 2, 0.5);
     casteld.setmat(1, 3, 0.25);
@@ -178,10 +192,12 @@ void initcastelDdeg2(Matrice &casteld)
     casteld.setmat(3, 1, 0.0);
     casteld.setmat(3, 2, 0.0);
     casteld.setmat(3, 3, 1.0);
+    return casteld;
 }
 
-void initcastelGdeg3(Matrice &castelg)
+Matrice initcastelGdeg3()
 {
+    Matrice castelg(4, 4);
     castelg.setmat(1, 1, 1.0);
     castelg.setmat(1, 2, 0.0);
     castelg.setmat(1, 3, 0.0);
@@ -201,10 +217,12 @@ void initcastelGdeg3(Matrice &castelg)
     castelg.setmat(4, 2, 0.125 * 3.0);
     castelg.setmat(4, 3, 0.125 * 3.0);
     castelg.setmat(4, 4, 0.125);
+    return castelg;
 }
 
-void initcastelDdeg3(Matrice &casteld)
+Matrice initcastelDdeg3()
 {
+    Matrice casteld(4, 4);
     casteld.setmat(1, 1, 0.125);
     casteld.setmat(1, 2, 0.125 * 3.0);
     casteld.setmat(1, 3, 0.125 * 3.0);
@@ -224,10 +242,12 @@ void initcastelDdeg3(Matrice &casteld)
     casteld.setmat(4, 2, 0.0);
     casteld.setmat(4, 3, 0.0);
     casteld.setmat(4, 4, 1.0);
+    return casteld;
 }
 
-void initcastelGdeg4(Matrice &castelg)
+Matrice initcastelGdeg4()
 {
+    Matrice castelg(5, 5);
     castelg.setmat(1, 1, 1.0);
     castelg.setmat(1, 2, 0.0);
     castelg.setmat(1, 3, 0.0);
@@ -257,11 +277,13 @@ void initcastelGdeg4(Matrice &castelg)
     castelg.setmat(5, 3, 0.0625 * 6.0); // 6/16 // pas forcément juste //triangle de pascal
     castelg.setmat(5, 4, 0.0625 * 4.0); // 4/16
     castelg.setmat(5, 5, 0.0625);       //    1/16
+
+    return castelg;
 }
 
-void initcastelDdeg4(Matrice &casteld)
+Matrice initcastelDdeg4()
 {
-
+    Matrice casteld(5, 5);
     casteld.setmat(1, 1, 0.0625);       //     1/16
     casteld.setmat(1, 2, 0.0625 * 4.0); // 4/16
     casteld.setmat(1, 3, 0.0625 * 6.0); // 6/16 // pas forcément juste
@@ -291,10 +313,12 @@ void initcastelDdeg4(Matrice &casteld)
     casteld.setmat(5, 3, 0.0);
     casteld.setmat(5, 4, 0.0);
     casteld.setmat(5, 5, 1.0);
+    return casteld;
 }
 
-void initcastelGdeg5(Matrice &castelg)
+Matrice initcastelGdeg5()
 {
+    Matrice castelg(6, 6);
     castelg.setmat(1, 1, 1.0);
     castelg.setmat(1, 2, 0.0);
     castelg.setmat(1, 3, 0.0);
@@ -336,11 +360,13 @@ void initcastelGdeg5(Matrice &castelg)
     castelg.setmat(6, 4, 0.03125 * 10.0); // 10/32
     castelg.setmat(6, 5, 0.03125 * 5.0);  // 5/32
     castelg.setmat(6, 6, 0.03125);        // 1/32
+
+    return castelg;
 }
 
-void initcastelDdeg5(Matrice &casteld)
+Matrice initcastelDdeg5()
 {
-
+    Matrice casteld(6, 6);
     casteld.setmat(1, 1, 0.03125);        // 1/32
     casteld.setmat(1, 2, 0.03125 * 5.0);  // 5/32
     casteld.setmat(1, 3, 0.03125 * 10.0); // 10/32  // pas forcément juste //triangle de pascal
@@ -382,4 +408,5 @@ void initcastelDdeg5(Matrice &casteld)
     casteld.setmat(6, 4, 0.0);
     casteld.setmat(6, 5, 0.0);
     casteld.setmat(6, 6, 1.0);
+    return casteld;
 }
