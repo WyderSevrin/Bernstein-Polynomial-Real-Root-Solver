@@ -3,9 +3,9 @@
 int main()
 {
 
-    Bernstein deg3(30000, 80, 1, -2);
-    deg3.root(0.01);
-    deg3.showracine();
+    Bernstein poly(0.5, 2, 1, 2, 10, -2);
+    poly.root(0.01);
+    poly.showracine();
 
     return 0;
 }

@@ -169,7 +169,7 @@ Bernstein::Bernstein(double a, double b, double c, double d, double e, double f)
     m_maxiteration = 1000;
     m_iteration = 0;
 
-    m_coeff = Matrice(5, 1);
+    m_coeff = Matrice(6, 1);
     m_coeff.setmat(1, 1, f);
     m_coeff.setmat(2, 1, e);
     m_coeff.setmat(3, 1, d);
