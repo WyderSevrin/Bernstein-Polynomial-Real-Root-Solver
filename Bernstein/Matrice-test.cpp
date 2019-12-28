@@ -2,6 +2,7 @@
 
 int main()
 {
+    //definition des matrices
     Matrice gog(2, 2);
     Matrice lop(2, 1);
     Matrice sgd(3, 3);
@@ -27,6 +28,9 @@ int main()
     lop.setmat(1, 1, 9);
     lop.setmat(2, 1, 3);
     //valide
+
+    //test des opperateurs
+
     Matrice peta = 2 * gog; //valide
     peta.showmat();
     Matrice yotta = peta * (1.0 / 2.0); //valide // attention 1 =int 1.0 = float
@@ -41,6 +45,7 @@ int main()
 
     std::cout << determinant(gog) << std::endl; //valide -16
 
+    //test de l'inversion de matrice
     std::cout << std::endl;
     std::cout << "Partie sgd" << std::endl;
     sgd.showmat();

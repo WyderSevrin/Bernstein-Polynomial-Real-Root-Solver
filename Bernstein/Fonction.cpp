@@ -1,10 +1,10 @@
 
 #include "Fonction.h"
 
-double maxinterval(Matrice &coeff)
-{ // 1+coeffmax
+double maxinterval(Matrice &coeff) //renvoie le coefficient la valeur la plus grande +1 , dans une matrice (m,1) qui servira a faire un interval
+{                                  // 1+coeffmax
     double max = absolue(coeff.getcell(0, 0));
-    for (int i = 0; i < coeff.getline(); i++)
+    for (int i = 0; i < coeff.getligne(); i++)
     {
         if (max < absolue(coeff.getcell(i, 0)))
         {
@@ -14,7 +14,7 @@ double maxinterval(Matrice &coeff)
     return absolue(max) + 1.0;
 }
 
-double absolue(double a)
+double absolue(double a) //renvoie la valeur absolue
 {
     if (a < 0)
     {
@@ -26,7 +26,7 @@ double absolue(double a)
     }
 }
 
-Matrice initmdeg2(double a, double b)
+Matrice initmdeg2(double a, double b) //renvoie la matrice de M d'interval [a,b]
 {
     Matrice m(3, 3);
     m.setmat(1, 1, b * b);
@@ -45,7 +45,7 @@ Matrice initmdeg2(double a, double b)
     return m;
 }
 
-Matrice initmdeg3(double a, double b)
+Matrice initmdeg3(double a, double b) //renvoie la matrice de M d'interval [a,b]
 {
     Matrice m(4, 4);
     m.setmat(1, 1, b * b * b);
@@ -72,7 +72,7 @@ Matrice initmdeg3(double a, double b)
     return m;
 }
 
-Matrice initmdeg4(double a, double b)
+Matrice initmdeg4(double a, double b) //renvoie la matrice de M d'interval [a,b]
 {
     Matrice m(5, 5);
     m.setmat(1, 1, b * b * b * b);
@@ -110,7 +110,7 @@ Matrice initmdeg4(double a, double b)
     return m;
 }
 
-Matrice initmdeg5(double a, double b)
+Matrice initmdeg5(double a, double b) //renvoie la matrice de M d'interval [a,b]
 {
     Matrice m(6, 6);
     m.setmat(1, 1, b * b * b * b * b);
@@ -160,7 +160,7 @@ Matrice initmdeg5(double a, double b)
     return m;
 }
 
-Matrice initcastelGdeg2()
+Matrice initcastelGdeg2() //renvoie la matrice de casteljau
 {
 
     Matrice castelg(3, 3);
@@ -178,7 +178,7 @@ Matrice initcastelGdeg2()
     return castelg;
 }
 
-Matrice initcastelDdeg2()
+Matrice initcastelDdeg2() //renvoie la matrice de casteljau
 {
     Matrice casteld(3, 3);
     casteld.setmat(1, 1, 0.25);
@@ -195,7 +195,7 @@ Matrice initcastelDdeg2()
     return casteld;
 }
 
-Matrice initcastelGdeg3()
+Matrice initcastelGdeg3() //renvoie la matrice de casteljau
 {
     Matrice castelg(4, 4);
     castelg.setmat(1, 1, 1.0);
@@ -220,7 +220,7 @@ Matrice initcastelGdeg3()
     return castelg;
 }
 
-Matrice initcastelDdeg3()
+Matrice initcastelDdeg3() //renvoie la matrice de casteljau
 {
     Matrice casteld(4, 4);
     casteld.setmat(1, 1, 0.125);
@@ -245,7 +245,7 @@ Matrice initcastelDdeg3()
     return casteld;
 }
 
-Matrice initcastelGdeg4()
+Matrice initcastelGdeg4() //renvoie la matrice de casteljau
 {
     Matrice castelg(5, 5);
     castelg.setmat(1, 1, 1.0);
@@ -272,23 +272,23 @@ Matrice initcastelGdeg4()
     castelg.setmat(4, 4, 0.125);
     castelg.setmat(4, 5, 0.0);
 
-    castelg.setmat(5, 1, 0.0625);       //     1/16
-    castelg.setmat(5, 2, 0.0625 * 4.0); // 4/16
-    castelg.setmat(5, 3, 0.0625 * 6.0); // 6/16 // pas forcément juste //triangle de pascal
-    castelg.setmat(5, 4, 0.0625 * 4.0); // 4/16
-    castelg.setmat(5, 5, 0.0625);       //    1/16
+    castelg.setmat(5, 1, 0.0625);
+    castelg.setmat(5, 2, 0.0625 * 4.0);
+    castelg.setmat(5, 3, 0.0625 * 6.0);
+    castelg.setmat(5, 4, 0.0625 * 4.0);
+    castelg.setmat(5, 5, 0.0625);
 
     return castelg;
 }
 
-Matrice initcastelDdeg4()
+Matrice initcastelDdeg4() //renvoie la matrice de casteljau
 {
     Matrice casteld(5, 5);
-    casteld.setmat(1, 1, 0.0625);       //     1/16
-    casteld.setmat(1, 2, 0.0625 * 4.0); // 4/16
-    casteld.setmat(1, 3, 0.0625 * 6.0); // 6/16 // pas forcément juste
-    casteld.setmat(1, 4, 0.0625 * 4.0); // 4/16
-    casteld.setmat(1, 5, 0.0625);       //    1/16
+    casteld.setmat(1, 1, 0.0625);
+    casteld.setmat(1, 2, 0.0625 * 4.0);
+    casteld.setmat(1, 3, 0.0625 * 6.0);
+    casteld.setmat(1, 4, 0.0625 * 4.0);
+    casteld.setmat(1, 5, 0.0625);
 
     casteld.setmat(2, 1, 0.0);
     casteld.setmat(2, 2, 0.125);
@@ -316,7 +316,7 @@ Matrice initcastelDdeg4()
     return casteld;
 }
 
-Matrice initcastelGdeg5()
+Matrice initcastelGdeg5() //renvoie la matrice de casteljau
 {
     Matrice castelg(6, 6);
     castelg.setmat(1, 1, 1.0);
@@ -347,39 +347,39 @@ Matrice initcastelGdeg5()
     castelg.setmat(4, 5, 0.0);
     castelg.setmat(4, 6, 0.0);
 
-    castelg.setmat(5, 1, 0.0625);       // 1/16
-    castelg.setmat(5, 2, 0.0625 * 4.0); // 4/16
-    castelg.setmat(5, 3, 0.0625 * 6.0); // 6/16 // pas forcément juste //triangle de pascal
-    castelg.setmat(5, 4, 0.0625 * 4.0); // 4/16
-    castelg.setmat(5, 5, 0.0625);       // 1/16
+    castelg.setmat(5, 1, 0.0625);
+    castelg.setmat(5, 2, 0.0625 * 4.0);
+    castelg.setmat(5, 3, 0.0625 * 6.0);
+    castelg.setmat(5, 4, 0.0625 * 4.0);
+    castelg.setmat(5, 5, 0.0625);
     castelg.setmat(5, 6, 0.0);
 
-    castelg.setmat(6, 1, 0.03125);        // 1/32
-    castelg.setmat(6, 2, 0.03125 * 5.0);  // 5/32
-    castelg.setmat(6, 3, 0.03125 * 10.0); // 10/32  // pas forcément juste //triangle de pascal
-    castelg.setmat(6, 4, 0.03125 * 10.0); // 10/32
-    castelg.setmat(6, 5, 0.03125 * 5.0);  // 5/32
-    castelg.setmat(6, 6, 0.03125);        // 1/32
+    castelg.setmat(6, 1, 0.03125);
+    castelg.setmat(6, 2, 0.03125 * 5.0);
+    castelg.setmat(6, 3, 0.03125 * 10.0);
+    castelg.setmat(6, 4, 0.03125 * 10.0);
+    castelg.setmat(6, 5, 0.03125 * 5.0);
+    castelg.setmat(6, 6, 0.03125);
 
     return castelg;
 }
 
-Matrice initcastelDdeg5()
+Matrice initcastelDdeg5() //renvoie la matrice de casteljau
 {
     Matrice casteld(6, 6);
-    casteld.setmat(1, 1, 0.03125);        // 1/32
-    casteld.setmat(1, 2, 0.03125 * 5.0);  // 5/32
-    casteld.setmat(1, 3, 0.03125 * 10.0); // 10/32  // pas forcément juste //triangle de pascal
-    casteld.setmat(1, 4, 0.03125 * 10.0); // 10/32
-    casteld.setmat(1, 5, 0.03125 * 5.0);  // 5/32
-    casteld.setmat(1, 6, 0.03125);        // 1/32
+    casteld.setmat(1, 1, 0.03125);
+    casteld.setmat(1, 2, 0.03125 * 5.0);
+    casteld.setmat(1, 3, 0.03125 * 10.0);
+    casteld.setmat(1, 4, 0.03125 * 10.0);
+    casteld.setmat(1, 5, 0.03125 * 5.0);
+    casteld.setmat(1, 6, 0.03125);
 
     casteld.setmat(2, 1, 0.0);
-    casteld.setmat(2, 2, 0.0625);       // 1/16
-    casteld.setmat(2, 3, 0.0625 * 4.0); // 4/16
-    casteld.setmat(2, 4, 0.0625 * 6.0); // 6/16 // pas forcément juste //triangle de pascal
-    casteld.setmat(2, 5, 0.0625 * 4.0); // 4/16
-    casteld.setmat(2, 6, 0.0625);       // 1/16
+    casteld.setmat(2, 2, 0.0625);
+    casteld.setmat(2, 3, 0.0625 * 4.0);
+    casteld.setmat(2, 4, 0.0625 * 6.0);
+    casteld.setmat(2, 5, 0.0625 * 4.0);
+    casteld.setmat(2, 6, 0.0625);
 
     casteld.setmat(3, 1, 0.0);
     casteld.setmat(3, 2, 0.0);
