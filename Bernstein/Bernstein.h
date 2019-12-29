@@ -3,23 +3,23 @@
 
 #include "Matrice.h"
 #include "Fonction.h"
-#include "Interval.h"
+#include "intervalle.h"
 
 class Bernstein
 {
 private:
-    int m_iteration;                                                            //nombre de découpage d'interval
-    int m_maxiteration;                                                         //nombre maximum de découpage d'interval //initialiser par le constructeur
-    Matrice m_invmG;                                                            //matrice inverse de M pour le coté gauche de l'interval [a,b]
-    Matrice m_invmD;                                                            //matrice inverse de M pour le coté droite de l'interval [a,b]
-    Matrice m_castelG;                                                          //matrice pour faire l'algorithme de casteljau pour decouper l'interval en deux ici le coté gauche
-    Matrice m_castelD;                                                          //matrice pour faire l'algorithme de casteljau pour decouper l'interval en deux ici le coté droite
-    Matrice m_coeff;                                                            //matrice représentant les coefficients du polynome
-    std::vector<double> m_racine;                                               // tableau stockant les racine
-    Interval m_origin;                                                          //interval d'origine [a,b] normalement -a=b
-    Interval m_originG;                                                         //interval d'origine coté gauche [a,0]
-    Interval m_originD;                                                         //interval d'origine coté droite [0,b]
-    void rootfinder(Matrice controlpoint, Interval interval, double precision); //permet de trouver les racines via une fonction récurente
+    int m_iteration;                                                                //nombre de découpage d'intervalle
+    int m_maxiteration;                                                             //nombre maximum de découpage d'intervalle //initialiser par le constructeur
+    Matrice m_invmG;                                                                //matrice inverse de M pour le coté gauche de l'intervalle [a,b]
+    Matrice m_invmD;                                                                //matrice inverse de M pour le coté droite de l'intervalle [a,b]
+    Matrice m_castelG;                                                              //matrice pour faire l'algorithme de casteljau pour decouper l'intervalle en deux ici le coté gauche
+    Matrice m_castelD;                                                              //matrice pour faire l'algorithme de casteljau pour decouper l'intervalle en deux ici le coté droite
+    Matrice m_coeff;                                                                //matrice représentant les coefficients du polynome
+    std::vector<double> m_racine;                                                   // tableau stockant les racine
+    Intervalle m_origin;                                                            //intervalle d'origine [a,b] normalement -a=b
+    Intervalle m_originG;                                                           //intervalle d'origine coté gauche [a,0]
+    Intervalle m_originD;                                                           //intervalle d'origine coté droite [0,b]
+    void rootfinder(Matrice controlpoint, Intervalle intervalle, double precision); //permet de trouver les racines via une fonction récurente
 
 public:
     void root(double precision); //permet de trouver les racines via la fonction "rootfinder"

@@ -1,7 +1,7 @@
 
 #include "Fonction.h"
 
-double maxinterval(Matrice &coeff) //renvoie le coefficient la valeur la plus grande +1 , dans une matrice (m,1) qui servira a faire un interval
+double maxintervalle(Matrice &coeff) //renvoie le coefficient la valeur la plus grande +1 , dans une matrice (m,1) qui servira a faire un intervalle
 {                                  // 1+coeffmax
     double max = absolue(coeff.getcell(0, 0));
     for (int i = 0; i < coeff.getligne(); i++)
@@ -26,7 +26,7 @@ double absolue(double a) //renvoie la valeur absolue
     }
 }
 
-Matrice initmdeg2(double a, double b) //renvoie la matrice de M d'interval [a,b]
+Matrice initmdeg2(double a, double b) //renvoie la matrice de M d'intervalle [a,b]
 {
     Matrice m(3, 3);
     m.setmat(1, 1, b * b);
@@ -45,7 +45,7 @@ Matrice initmdeg2(double a, double b) //renvoie la matrice de M d'interval [a,b]
     return m;
 }
 
-Matrice initmdeg3(double a, double b) //renvoie la matrice de M d'interval [a,b]
+Matrice initmdeg3(double a, double b) //renvoie la matrice de M d'intervalle [a,b]
 {
     Matrice m(4, 4);
     m.setmat(1, 1, b * b * b);
@@ -72,7 +72,7 @@ Matrice initmdeg3(double a, double b) //renvoie la matrice de M d'interval [a,b]
     return m;
 }
 
-Matrice initmdeg4(double a, double b) //renvoie la matrice de M d'interval [a,b]
+Matrice initmdeg4(double a, double b) //renvoie la matrice de M d'intervalle [a,b]
 {
     Matrice m(5, 5);
     m.setmat(1, 1, b * b * b * b);
@@ -110,7 +110,7 @@ Matrice initmdeg4(double a, double b) //renvoie la matrice de M d'interval [a,b]
     return m;
 }
 
-Matrice initmdeg5(double a, double b) //renvoie la matrice de M d'interval [a,b]
+Matrice initmdeg5(double a, double b) //renvoie la matrice de M d'intervalle [a,b]
 {
     Matrice m(6, 6);
     m.setmat(1, 1, b * b * b * b * b);

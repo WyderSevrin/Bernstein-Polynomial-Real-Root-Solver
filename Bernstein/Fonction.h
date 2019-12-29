@@ -2,7 +2,7 @@
 #define FONCTION_H
 #include "Matrice.h"
 
-double maxinterval(Matrice &coeff); //renvoie le coefficient la valeur la plus grande +1 , dans une matrice (m,1) qui servira a faire un interval
+double maxintervalle(Matrice &coeff); //renvoie le coefficient la valeur la plus grande +1 , dans une matrice (m,1) qui servira a faire un intervalle
 
 double absolue(double a); //renvoie la valeur absolue
 
@@ -15,9 +15,9 @@ Matrice initcastelDdeg4(); //renvoie la matrice de casteljau
 Matrice initcastelGdeg5(); //renvoie la matrice de casteljau
 Matrice initcastelDdeg5(); //renvoie la matrice de casteljau
 
-Matrice initmdeg2(double a, double b); //renvoie la matrice de M d'interval [a,b]
-Matrice initmdeg3(double a, double b); //renvoie la matrice de M d'interval [a,b]
-Matrice initmdeg4(double a, double b); //renvoie la matrice de M d'interval [a,b]
-Matrice initmdeg5(double a, double b); //renvoie la matrice de M d'interval [a,b]
+Matrice initmdeg2(double a, double b); //renvoie la matrice de M d'intervalle [a,b]
+Matrice initmdeg3(double a, double b); //renvoie la matrice de M d'intervalle [a,b]
+Matrice initmdeg4(double a, double b); //renvoie la matrice de M d'intervalle [a,b]
+Matrice initmdeg5(double a, double b); //renvoie la matrice de M d'intervalle [a,b]
 
 #endif
