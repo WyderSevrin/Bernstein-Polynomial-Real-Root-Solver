@@ -15,7 +15,7 @@ void Bernstein::rootfinder(Matrice controlpoint, Interval interval, double preci
     for (int i = 0; i < (controlpoint.getligne() - 1); i++) //on parcourt les points de controle du polynome de bernstein
     {
 
-        if (((controlpoint.getcell(i, 0) >= 0) && (controlpoint.getcell(i + 1, 0) <= 0)) || ((controlpoint.getcell(i, 0) <= 0) && (controlpoint.getcell(i + 1, 0) >= 0))) //on regarde si il y a un changement de signe dans les points de controle
+        if (((controlpoint.getcell(i, 0) > 0) && (controlpoint.getcell(i + 1, 0) <= 0)) || ((controlpoint.getcell(i, 0) < 0) && (controlpoint.getcell(i + 1, 0) >= 0))) //on regarde si il y a un changement de signe dans les points de controle
         {
             racine = true;
             coordYpointgauche = controlpoint.getcell(i, 0);     //definition de la coordonné y du point a gauche de y=0
@@ -46,9 +46,9 @@ void Bernstein::rootfinder(Matrice controlpoint, Interval interval, double preci
             //on trace un segment entre le point à gauche de y=0 et le point à droite de y=0
             double coordXpointgauche = interval.getgauche() + ((indice * interval.getdelta()) / (controlpoint.getligne() - 1));       //on calcul le point à gauche de y=0
             double coordXpointdroite = interval.getgauche() + (((indice + 1) * interval.getdelta()) / (controlpoint.getligne() - 1)); //on calcul le point à droite de y=0
-            double pente = (coordYpointdroite - coordYpointgauche) / (coordXpointdroite - coordXpointgauche);                        //on calcul la pente entre les deux points
-            double offset = coordYpointgauche - pente * coordXpointgauche;                                                           //on calcul "b" de y=ax+b
-            double root = -1.0 * (offset / pente);                                                                                   //on calcul pour y=0 donc 0=-(b/a) ce qui donne la racine
+            double pente = (coordYpointdroite - coordYpointgauche) / (coordXpointdroite - coordXpointgauche);                         //on calcul la pente entre les deux points
+            double offset = coordYpointgauche - pente * coordXpointgauche;                                                            //on calcul "b" de y=ax+b
+            double root = -1.0 * (offset / pente);                                                                                    //on calcul pour y=0 donc 0=-(b/a) ce qui donne la racine
 
             if (root != root) //si la valeur de la racine n'est pas defini alors on rentre dans le if car (a != nan) est toujours vrai
             {
