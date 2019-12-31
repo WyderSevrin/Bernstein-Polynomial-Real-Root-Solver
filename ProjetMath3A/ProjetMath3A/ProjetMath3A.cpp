@@ -3,9 +3,10 @@
 
 #include <iostream>
 #include <string>
-#include "Poly3.h"
 #include <stdlib.h>
+#include "Poly3.h"
 #include "Poly4.h"
+#include "Poly5.h"
 
 void solve3() {
 	std::cout << "Faite votre choix en tapant le numero :\n";
@@ -23,9 +24,7 @@ void solve4() {
 }
 void solve5() {
 	std::cout << "Faite votre choix en tapant le numero :\n";
-	std::cout << "1_Cadran\n";
-	std::cout << "2_Newton\n";
-
+	std::cout << "1_Solver Multiple\n";
 	std::cout << "4_Retour\n\n";
 
 }
@@ -138,13 +137,29 @@ int main()
 			std::cin >> choix2;
 			if (choix2 != "4") {
 				if (choix2 == "1") {
-					std::cout << "PAS ENCORE IMPLEMENTER\n";
-				}
-				else if (choix2 == "") {
-					std::cout << "PAS ENCORE IMPLEMENTER\n";
-				}
-				else if(choix2 == ""){
-					std::cout << "PAS ENCORE IMPLEMENTER\n";
+					std::cout << "\nDonner l'equation :\n";
+					std::cout << "aX^5 + bX^4+ cX^3 +dX^2 +eX +f\n";
+					double a, b, c, d, e,f = 0;
+					std::cout << "a :\n";
+					std::cin >> a;
+
+					while (a == 0) {
+						std::cout << "a doit pas etre 0, reprendre a :\n";
+						std::cin >> a;
+					}
+
+					std::cout << "b :\n";
+					std::cin >> b;
+					std::cout << "c :\n";
+					std::cin >> c;
+					std::cout << "d :\n";
+					std::cin >> d;
+					std::cout << "e :\n";
+					std::cin >> e;
+					std::cout << "f :\n";
+					std::cin >> f;
+					Poly5 p5(a,b,c,d,e,f);
+					p5.solve();
 				}
 				else{
 					choix2 = "0";//retour
