@@ -61,8 +61,12 @@ void Poly5::solve()
 	double e = polynome[0];
 	Poly4 p4(a, b, c, d, e);
 	p4.ferrrari();
-	m_racine.insert(m_racine.end(),p4.getRacines().begin(),p4.getRacines().end());
-	
+	int nbRacinedeg4 = p4.getRacines().size();
+	for (int i = 0; i < nbRacinedeg4; i++)
+	{
+		m_racine.push_back(p4.getRacines().at(i));
+	}
+	//m_racine.insert(m_racine.end(),p4.getRacines().begin(),p4.getRacines().end()); Cette methode ne marche pas tous le temps ATTENTION !!
 }
 
 
@@ -136,7 +140,7 @@ double Poly5::Newton(double polynome[6], int degree, double x0) {
 	return xi;
 }
 
-//Permet d'affiche rune equation intermediaire
+//Permet d'afficher une equation intermediaire, utilisation des fonctionss du language C
 void Poly5::afficheEquation(char variable, double equation[6], int degree, int afficheZero = 1)
 {
 	int n;
