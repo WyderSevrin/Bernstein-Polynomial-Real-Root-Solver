@@ -12,6 +12,7 @@ public :
 	void solve();
 	double Newton(double polynome[6], int degree, double x0);
 	double calculPoly(double polynome[6], int degree, double x);
+	void afficherRacines();
 private :
 	
 	double m_a;
@@ -22,7 +23,7 @@ private :
 	double m_f;
 
 	double m_racines[5];
-
+	std::vector<double> m_racine;
 	void afficheEquation(char variable, double equation[6], int degree, int afficheZero);
 };
 

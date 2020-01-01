@@ -28,8 +28,8 @@ void Poly5::solve()
 
 	double x0, equation[6] = { m_f, m_e, m_d, m_c, m_b, m_a };
 	x0 = Newton(equation, 5, 0.5);
-	printf("Une racine a ete trouvee : x1 = %lf\r\n\n", x0);
-
+	//printf("Une racine a ete trouvee : x1 = %lf\r\n\n", x0);
+	m_racine.push_back(x0);
 	double polynome[5];
 	/* Factorisation par la m�thode de Horner */
 	polynome[4] = m_a;
@@ -39,8 +39,8 @@ void Poly5::solve()
 	polynome[0] = m_e + polynome[1] * x0;
 
 
-	printf("On factorise le polynome par la racine trouvee :\r\n\n");
-
+	//printf("On factorise le polynome par la racine trouvee :\r\n\n");
+/*
 	if (x0 < 0.0)
 	{
 		printf("(x+%lf)(", -x0);
@@ -49,18 +49,20 @@ void Poly5::solve()
 	{
 		printf("(x-%lf)(", x0);
 	}
-
-	afficheEquation('x', polynome, 4, 0);
-	printf(") = 0\r\n\n");
+*/
+	//afficheEquation('x', polynome, 4, 0);
+	//printf(") = 0\r\n\n");
 
 	//degre4(polynome[4], polynome[3], polynome[2], polynome[1], polynome[0], variable, 'z', 'y', x0);
-	double a = polynome[0];
-	double b = polynome[1];
+	double a = polynome[4];
+	double b = polynome[3];
 	double c = polynome[2];
-	double d = polynome[3];
-	double e = polynome[4];
-	Poly4 p4(e, d, c, b, a);
+	double d = polynome[1];
+	double e = polynome[0];
+	Poly4 p4(a, b, c, d, e);
 	p4.ferrrari();
+	m_racine.insert(m_racine.end(),p4.getRacines().begin(),p4.getRacines().end());
+	
 }
 
 
@@ -134,6 +136,7 @@ double Poly5::Newton(double polynome[6], int degree, double x0) {
 	return xi;
 }
 
+//Permet d'affiche rune equation intermediaire
 void Poly5::afficheEquation(char variable, double equation[6], int degree, int afficheZero = 1)
 {
 	int n;
@@ -182,5 +185,14 @@ void Poly5::afficheEquation(char variable, double equation[6], int degree, int a
 	if (afficheZero == 1)
 	{
 		printf(" = 0\r\n\n");
+	}
+}
+
+//Permet d'afficher les racines
+void Poly5::afficherRacines(){
+	int nbRacines = m_racine.size();
+	std::cout<<"Il y a "<<nbRacines<<" racines"<<std::endl;
+	for(int i = 0; i<nbRacines;i++){
+		std::cout<<"X"<<i+1<<" = "<<m_racine.at(i)<<std::endl;
 	}
 }

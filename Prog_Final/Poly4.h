@@ -13,7 +13,8 @@ public:
 	void bicar(double a, double c);
 	void ferrrari();
 	double sizetab(double tab[]);
-
+	void afficherRacines();
+	std::vector<double> getRacines();
 private:
 	double m_a;
 	double m_b;
@@ -22,5 +23,6 @@ private:
 	double m_e;
 
 	double m_racines[4];
+	std::vector<double> m_racine;
 };
 

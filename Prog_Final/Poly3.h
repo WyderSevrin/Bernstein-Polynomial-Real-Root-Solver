@@ -1,5 +1,6 @@
 #pragma once
 #include <math.h>
+#include <vector>
 #include <iostream>
 class Poly3
 {
@@ -12,6 +13,7 @@ public:
 	double _root3(double x);
 
 	void getRacines(double racines[]);
+	void afficherRacines();
 private:
 	double m_a;
 	double m_b;
@@ -19,7 +21,8 @@ private:
 	double m_d;
 
 
-
+	std::vector<double> m_racine;
 	double m_racines[3];
+
 };
 

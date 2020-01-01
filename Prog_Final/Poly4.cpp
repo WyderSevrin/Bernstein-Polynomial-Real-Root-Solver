@@ -44,15 +44,23 @@ void Poly4::bicar(double a, double c) {
 			x4 = -x3; 
 		}
 		if (t12 && t22) {
-			std::cout << "Il y a 4 racines : " << std::endl;
+			//std::cout << "Il y a 4 racines : " << std::endl;
+			m_racines[0] = x1;
+			m_racines[1] = x2;
+			m_racines[2] = x3;
+			m_racines[3] = x4;
 		}
 		else if (t12) {
-			std::cout << "Il y a 2 racines : " << std::endl;
-			std::cout << "X1 : " << x1 <<"X2 : "<<x2<< std::endl;
+			m_racines[0] = x1;
+			m_racines[1] = x2;
+			//std::cout << "Il y a 2 racines : " << std::endl;
+			//std::cout << "X1 : " << x1 <<"X2 : "<<x2<< std::endl;
 		}
 		else if (t22) {
-			std::cout << "Il y a 2 racines : " << std::endl;
-			std::cout << "X1 : " <<x3<<"X2 : "<<x4<< std::endl;
+			m_racines[0] = x3;
+			m_racines[1] = x4;
+			//std::cout << "Il y a 2 racines : " << std::endl;
+			//std::cout << "X1 : " <<x3<<"X2 : "<<x4<< std::endl;
 		}
 	}
 }
@@ -63,21 +71,21 @@ void Poly4::ferrrari()
 	double C = (-3 * pow(m_b / (4 * m_a), 4)) + ((m_c * pow(m_b / 4, 2)) / pow(m_a, 3)) - ((0.25 * m_b * m_d) / pow(m_a, 2)) + (m_e / m_a);
 
 	//std::cout << "A = " << A << "\n B = " << B << "\n C = " << C << std::endl;
-	//Equation bicarrée de la forme X^4+AX^2+C =0 avec X^2 = Y
+	//Equation bicarrï¿½e de la forme X^4+AX^2+C =0 avec X^2 = Y
 	if (B == 1e-14) {
 		std::cout << "Solution bicarre" << std::endl;
 		bicar(A, C);
 
 	}
 	else {
-		//Resolution du degrée 3
+		//Resolution du degrï¿½e 3
 		double a = 1;
 		double b = -A;
 		double c = -4 * C;
 		double d = 4 * A * C - pow(B, 2);
 		double bs = m_b / 4 / m_a;
 		Poly3 p3(a, b, c, d);
-		std::cout << "Racines de la forme du polynome " << std::endl;
+		//std::cout << "Racines de la forme du polynome " << std::endl;
 		p3.cardan();
 		double racinesCardan[3];
 		p3.getRacines(racinesCardan);
@@ -117,15 +125,15 @@ void Poly4::ferrrari()
 		//endFerrari
 		double uma = u - A;
 		double z = B / (2 * uma);
-		std::cout << "z = " << z << std::endl;  //z pas la bonne valeur
+		//std::cout << "z = " << z << std::endl;  //z pas la bonne valeur
 		//std::cout << "u-A = " << uma << std::endl;
 
-		//Résolution polynome Degrée 2
+		//Rï¿½solution polynome Degrï¿½e 2
 		
 		double d1 = uma - 4 * (z * sqrt(uma) + u / 2);
 		double t1 = 0;
 		double x1, x2, x3, x4 = 0;
-		std::cout << "bs : " << bs << std::endl;
+		//std::cout << "bs : " << bs << std::endl;
 		if (d1 >= 0) {
 			x1 = (sqrt(uma) + sqrt(d1)) / 2 - bs ;
 			x2 = (sqrt(uma) - sqrt(d1)) / 2 - bs ;
@@ -140,28 +148,53 @@ void Poly4::ferrrari()
 			t2 = 1;
 		}
 		if (t1==0 && t2 == 0) {
-			std::cout << "\n!!Pas de solutions !!\n" << std::endl;
+			std::cout << "\n!!Pas de solutions pour degre 4 !!\n" << std::endl;
 
 		}
 		if (t1 * t2 == 0 && (t1 == 1 || t2 ==1))
 		{
-			std::cout << "\nDeux solutions" << std::endl;
+			//std::cout << "\nDeux solutions" << std::endl;
 			
 			if (t1 == 1) {
-				std::cout << "x1 = " << x1 << "\nx2 = " << x2 << std::endl;
+				m_racine.push_back(x1);
+				m_racine.push_back(x2);
+				//m_racines[1] = x2;
+				//std::cout << "x1 = " << x1 << "\nx2 = " << x2 << std::endl;
 			}
 			if (t2 == 1) {
-				std::cout << "x1 = " << x3 << "\nx2 = " << x4 << std::endl;
+				m_racine.push_back(x3);
+				m_racine.push_back(x4);
+				//m_racines[0] = x3;
+				//m_racines[1] = x4;
+				//std::cout << "x1 = " << x3 << "\nx2 = " << x4 << std::endl;
 			}
 		}
 		else if (t1 ==1 && t2 ==1)
 		{
-			std::cout << "\nQuatre solutions" << std::endl;
-			std::cout << "x1 = " << x1 << "\nx2 = " << x2 << std::endl;
-			std::cout << "x3 = " << x3 << "\nx4 = " << x4 << std::endl;
+			m_racine.push_back(x1);
+			m_racine.push_back(x2);
+			m_racine.push_back(x3);
+			m_racine.push_back(x4);
+			//m_racines[0] = x1;
+			//m_racines[1] = x2;
+			//m_racines[2] = x3;
+			//m_racines[3] = x4;
+			//std::cout << "\nQuatre solutions!!!" << std::endl;
+			//std::cout << "x1 = " << x1 << "\nx2 = " << x2 << std::endl;
+			//std::cout << "x3 = " << x3 << "\nx4 = " << x4 << std::endl;
 
 		}
 	}
+}
+void Poly4::afficherRacines(){
+	int nbRacines = m_racine.size();
+	std::cout<<"Il y a "<<nbRacines<<" racines"<<std::endl;
+	for(int i = 0; i<nbRacines;i++){
+		std::cout<<"X"<<i+1<<" = "<<m_racine.at(i)<<std::endl;
+	}
+}
+std::vector<double> Poly4::getRacines(){
+	return m_racine;
 }
 
 double Poly4::sizetab(double tab[]) 

@@ -54,11 +54,12 @@ int main()
 			std::cin >> choix2;
 			
 			if (choix2 != "4") {
+				double a, b, c, d = 0;
 				////////////////////// Cardan /////////
 				if (choix2 == "1") {
 					std::cout << "\nDonner l'equation :\n";
 					std::cout << "aX^3 + bX^2 + c^X +d\n";
-					double a, b, c, d = 0;
+					
 					std::cout << "a :\n";
 					std::cin >> a;
 
@@ -76,6 +77,7 @@ int main()
 
 					Poly3 poly3(a, b, c, d);
 					poly3.cardan();
+					poly3.afficherRacines();
 
 					std::cout <<"\nContinuer ? tapez 1"<< std::endl;
 					std::cin >> choix;
@@ -84,10 +86,9 @@ int main()
 					}
 
 				}else if (choix2 == "2") { //Méthode de Berntein
-					double a, b, c, d = 0;
+					
 					std::cout << "\nDonner l'equation :\n";
 					std::cout << "aX^3 + bX^2 + c^X +d\n";
-					double a, b, c, d = 0;
 					std::cout << "a :\n";
 					std::cin >> a;
 
@@ -140,7 +141,8 @@ int main()
 					std::cin >> e;
 
 					Poly4 poly4(a, b, c, d,e);
-					poly4.ferrrari(); 
+					poly4.ferrrari();
+					poly4.afficherRacines(); 
 				}
 				else if (choix2 == "2") { //Méthode de Berntein
 					std::cout << "\nDonner l'equation :\n";
@@ -176,6 +178,7 @@ int main()
 			solve5();
 			std::cin >> choix2;
 			if (choix2 != "4") {
+
 				if (choix2 == "1") { // Méthode Usuelle
 					std::cout << "\nDonner l'equation :\n";
 					std::cout << "aX^5 + bX^4+ cX^3 +dX^2 +eX +f\n";
@@ -200,6 +203,7 @@ int main()
 					std::cin >> f;
 					Poly5 p5(a,b,c,d,e,f);
 					p5.solve();
+					p5.afficherRacines();
 				}else if(choix2 == "2") {//Méthode de Bernstein
 					std::cout << "\nDonner l'equation :\n";
 					std::cout << "aX^5 + bX^4+ cX^3 +dX^2 +eX +f\n";

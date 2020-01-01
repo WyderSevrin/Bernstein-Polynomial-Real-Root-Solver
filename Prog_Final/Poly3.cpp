@@ -25,7 +25,7 @@ Poly3::Poly3(double a, double b, double c, double d) :
 
 void Poly3::cardan()
 {
-	// les variables utilisée //
+	// les variables utilisï¿½e //
 	double p, q, det, u = 0;
 
 	// les trois solutions avec le nombre de sol. //
@@ -46,7 +46,7 @@ void Poly3::cardan()
 		{
 			X1 = -m_b / (3.0 * m_a) + pow(-q, (1.0 / 3.0));
 		}
-		std::cout << "Une solution trouvee!\n\nX1 = " << X1;
+		//std::cout << "Une solution trouvee!\n\nX1 = " << X1;
 	}
 	else
 	{
@@ -55,7 +55,7 @@ void Poly3::cardan()
 		if (det > 0)
 		{
 			/* le teste suivant est utile car le c++ (comme le vb)
-			 ne savent pas faire des racine cubique négatives ...*/
+			 ne savent pas faire des racine cubique nï¿½gatives ...*/
 
 			if (sgn(-q * 0.5 + pow(det, 0.5)) == 1)
 			{
@@ -66,13 +66,16 @@ void Poly3::cardan()
 				u = -pow(-(-q * 0.5 + pow(det, 0.5)), (1. / 3.));
 			}
 			X1 = -m_b / (3.0 * m_a) + u - (p / (3. * u));
-			std::cout << "Une solution trouvee!\n\nX1 = " << X1;
+			m_racine.push_back(X1);
+			//std::cout << "Une solution trouvee!\n\nX1 = " << X1;
 		}
 		if (det == 0)
 		{
 			X1 = -m_b / (3. * m_a) + sgn(q) * pow((-p / 3.), 0.5);
 			X2 = -m_b / (3. * m_a) - 2.0*sgn(q) * pow((-p / 3.), 0.5);
-			std::cout << "Trois solutions trouvees dont une double!\n\nX1 et X2  = " << X1 <<" et "<< X1 << "\nX2 = " << X2;
+			m_racine.push_back(X1);
+			m_racine.push_back(X2);
+			//std::cout << "Trois solutions trouvees dont une double!\n\nX1 et X2  = " << X1 <<" et "<< X1 << "\nX2 = " << X2;
 		}
 		if (det < 0)
 		{
@@ -86,32 +89,49 @@ void Poly3::cardan()
 			X1 = vt + 2. * sqrt(-p / 3.) * cos(alf);
 			X2 = vt + 2. * sqrt(-p / 3.) * cos(alf+( 2. * PI) / 3.);
 			X3 = vt + 2. * sqrt(-p / 3.) * cos(alf+( 4. * PI) / 3.);
+			
+			m_racine.push_back(X1);
+			m_racine.push_back(X2);
+			m_racine.push_back(X3);
 
-
-			/* Autre méthode qui revient au même sans utiliser PI
+			/* Autre mï¿½thode qui revient au mï¿½me sans utiliser PI
 			double omega = acos(-q / (2 * sqrt(pow(-p, 3) / 27)));
 			X1 = vt + 2 * r * cos(omega / 3);
 			X2 = vt - r * cos(omega / 3) + sqrt(p*( pow(cos(omega/3),2) ) - p );
 			X3 = vt - r * cos(omega / 3) - sqrt(p * (pow(cos(omega / 3), 2)) - p);
 			*/
 
-			std::cout << "Trois solutions trouvees!\n\nX1 = " << X1 << "\nX2 = " << X2 << "\nX3 = " << X3;
+			//std::cout << "Trois solutions trouvees!\n\nX1 = " << X1 << "\nX2 = " << X2 << "\nX3 = " << X3;
 		
 
 		}
 	}
 	//permet de recuperer les racines pour des applications suivantes 
-	this->m_racines[0] = X1;
-	this->m_racines[1] = X2;
-	this->m_racines[2] = X3;
+	//this->m_racines[0] = X1;
+	//this->m_racines[1] = X2;
+	//this->m_racines[2] = X3;
+
+	
 }
 
 void Poly3::getRacines(double racines[])
 {
+	/*
 	for (int i = 0; i < 3;i++) {
 		racines[i] = this->m_racines[i];
-	}
+	}*/
 	//racines = this->m_racines;
+	for (int i = 0; i < m_racine.size();i++) {
+		racines[i] = this->m_racine.at(i);
+	}
+}
+
+void Poly3::afficherRacines(){
+	int nbRacines = m_racine.size();
+	std::cout<<"Il y a "<<nbRacines<<" racines"<<std::endl;
+	for(int i = 0; i<nbRacines;i++){
+		std::cout<<"X"<<i+1<<" = "<<m_racine.at(i)<<std::endl;
+	}
 }
 
 void Poly3::cardanI()
