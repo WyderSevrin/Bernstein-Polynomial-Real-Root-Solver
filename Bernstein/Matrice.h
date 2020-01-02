@@ -1,7 +1,7 @@
 #ifndef MATRICE_H
 #define MATRICE_H
 
-#include "iostream"
+#include <iostream>
 #include "vector"
 
 class Matrice
@@ -33,7 +33,7 @@ Matrice operator*(Matrice const &mat1, Matrice const &mat2); //mat1 * mat2 //sur
 Matrice creationmatriceinf(Matrice matrice, int k, int i);   // crée la matrice [m-1 , n-1] pour calculer le determinant
 double determinant(Matrice matrice);                         //renvoie le determinant de la Matrice
 double adjugate(Matrice matrice, int m, int n);              //renvoie la valeur de la matrice
-Matrice inv(Matrice matrice);                                //inverse la matrice adjointe
+Matrice inv(Matrice matrice);                                //inverse la comatrice
 Matrice transpose(Matrice matrice);                          //fait la transposé de la matrice
 
 #endif
