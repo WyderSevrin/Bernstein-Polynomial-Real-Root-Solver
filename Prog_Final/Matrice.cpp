@@ -162,7 +162,7 @@ double determinant(Matrice matrice) //calcul le determinant
     }
 }
 
-double adjugate(Matrice matrice, int k, int i) // k = m ; i= n //calcul la matrice adjointe
+double adjugate(Matrice matrice, int k, int i) // k = m ; i= n //calcul la comatrice
 {
     double coefficient = 0.0;
     int exposant = k + i;
