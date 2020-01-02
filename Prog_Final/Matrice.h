@@ -34,6 +34,6 @@ Matrice creationmatriceinf(Matrice matrice, int k, int i);   // crée la matrice
 double determinant(Matrice matrice);                         //renvoie le determinant de la Matrice
 double adjugate(Matrice matrice, int m, int n);              //renvoie la valeur de la matrice
 Matrice inv(Matrice matrice);                                //inverse la matrice adjointe
-Matrice transpose(Matrice matrice);                          //fait la transposé de la matrice
+Matrice transpose(Matrice matrice);                          //fait la transposé de la comatrice
 
 #endif
