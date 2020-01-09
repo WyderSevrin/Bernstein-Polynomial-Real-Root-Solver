@@ -1,4 +1,4 @@
-#include "matrice.h"
+#include "Matrice.h"
 
 void Matrice::showmat() const
 {
