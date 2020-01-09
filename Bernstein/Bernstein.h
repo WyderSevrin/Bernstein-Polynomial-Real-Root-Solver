@@ -3,7 +3,7 @@
 
 #include "Matrice.h"
 #include "Fonction.h"
-#include "intervalle.h"
+#include "Intervalle.h"
 
 class Bernstein
 {
