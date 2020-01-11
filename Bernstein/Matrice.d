@@ -1,1 +1,1 @@
-Matrice.o: Matrice.cpp matrice.h
+Matrice.o: Matrice.cpp Matrice.h

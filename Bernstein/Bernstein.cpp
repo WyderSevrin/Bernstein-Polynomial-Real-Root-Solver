@@ -8,8 +8,11 @@ void Bernstein::rootfinder(Matrice controlpoint, Intervalle intervalle, double p
     double coordYpointgauche = 0;
     double coordYpointdroite = 0;
     int compteur = 0;
-    double indice = 0.0;
-
+    double indiceG = 0.0;
+    double indiceD = 0.0;
+    /* controlpoint.showmat();
+    intervalle.showintervalle();
+    std::cout << std::endl;*/
     //test racine et racine multiple genre  1 -1 1 -1 racine multiple et racine // + coorY des point// attention au 0
 
     for (int i = 0; i < (controlpoint.getligne() - 1); i++) //on parcourt les points de controle du polynome de bernstein
@@ -18,10 +21,21 @@ void Bernstein::rootfinder(Matrice controlpoint, Intervalle intervalle, double p
         if (((controlpoint.getcell(i, 0) > 0) && (controlpoint.getcell(i + 1, 0) <= 0)) || ((controlpoint.getcell(i, 0) < 0) && (controlpoint.getcell(i + 1, 0) >= 0))) //on regarde si il y a un changement de signe dans les points de controle
         {
             racine = true;
-            coordYpointgauche = controlpoint.getcell(i, 0);     //definition de la coordonné y du point a gauche de y=0
-            coordYpointdroite = controlpoint.getcell(i + 1, 0); //definition de la coordonné y du point a droite de y=0
-            indice = i;                                         //indice de la valeur gauche où il y a la racine
-            compteur++;                                         //si il a plusieurs racines dans l'intervalle on
+            coordYpointgauche = controlpoint.getcell(i, 0); //definition de la coordonné y du point a gauche de y=0
+
+            if (controlpoint.getcell((controlpoint.getligne() - 1), 0) == 0) // si le point tout a droite est sur 0 , on est sur que c'est une racine vue que la courbe de bezier et obliger de passer par là
+            {
+                coordYpointdroite = controlpoint.getcell((controlpoint.getligne() - 1), 0); //definition de la coordonné y du point a droite de y=0
+                indiceD = controlpoint.getligne() - 1;
+            }
+            else
+            {
+                coordYpointdroite = controlpoint.getcell(i + 1, 0); //definition de la coordonné y du point a droite de y=0
+                indiceD = i + 1;
+            }
+
+            indiceG = i; //indice de la valeur gauche où il y a la racine
+            compteur++;  //si il a plusieurs racines dans l'intervalle on
         }
     }
     if (compteur > 1) //on teste si il y a plusieurs racines dans l'intervalle
@@ -35,6 +49,7 @@ void Bernstein::rootfinder(Matrice controlpoint, Intervalle intervalle, double p
         // on arrete de calculer les nouveaux intervalles si on dépasser la précision ou si il y a plusieurs racines dans l'intervalle et le nombre maximum d'iteration
         if (((intervalle.getdelta() > precision) || (racinemultiple == true)) && (m_maxiteration > m_iteration))
         {
+
             m_iteration++;                                                   //on incremmente m_iteration car on doit pour limiter le nombre de division de l'intervalle
             Matrice controlpointG = m_castelG * controlpoint;                //on calcul les nouveaux poit de control pour la partie gauche de l'intervalle c'est l'algorithme de Casteljau
             Matrice controlpointD = m_castelD * controlpoint;                //on calcul les nouveaux poit de control pour la partie droite de l'intervalle c'est l'algorithme de Casteljau
@@ -44,16 +59,16 @@ void Bernstein::rootfinder(Matrice controlpoint, Intervalle intervalle, double p
         else
         {
             //on trace un segment entre le point à gauche de y=0 et le point à droite de y=0
-            double coordXpointgauche = intervalle.getgauche() + ((indice * intervalle.getdelta()) / (controlpoint.getligne() - 1));       //on calcul le point à gauche de y=0
-            double coordXpointdroite = intervalle.getgauche() + (((indice + 1) * intervalle.getdelta()) / (controlpoint.getligne() - 1)); //on calcul le point à droite de y=0
-            double pente = (coordYpointdroite - coordYpointgauche) / (coordXpointdroite - coordXpointgauche);                             //on calcul la pente entre les deux points
-            double offset = coordYpointgauche - pente * coordXpointgauche;                                                                //on calcul "b" de y=ax+b
-            double root = -1.0 * (offset / pente);                                                                                        //on calcul pour y=0 donc 0=-(b/a) ce qui donne la racine
+            double coordXpointgauche = intervalle.getgauche() + ((indiceG * intervalle.getdelta()) / (controlpoint.getligne() - 1)); //on calcul le point à gauche de y=0
+            double coordXpointdroite = intervalle.getgauche() + (((indiceD)*intervalle.getdelta()) / (controlpoint.getligne() - 1)); //on calcul le point à droite de y=0
+            double pente = (coordYpointdroite - coordYpointgauche) / (coordXpointdroite - coordXpointgauche);                        //on calcul la pente entre les deux points
+            double offset = coordYpointgauche - pente * coordXpointgauche;                                                           //on calcul "b" de y=ax+b
+            double root = -1.0 * (offset / pente);                                                                                   //on calcul pour y=0 donc 0=-(b/a) ce qui donne la racine
 
-            if (root != root) //si la valeur de la racine n'est pas defini alors on rentre dans le if car (a != nan) est toujours vrai
+            /*if (root != root) //si la valeur de la racine n'est pas defini alors on rentre dans le if car (a != nan) est toujours vrai
             {
                 root = (intervalle.getgauche() + intervalle.getdelta() / 2); //on prend le milieu de l'intervalle
-            }
+            }*/
             m_racine.push_back(root); //on ecrit la racine dans le tableau
         }
     }
