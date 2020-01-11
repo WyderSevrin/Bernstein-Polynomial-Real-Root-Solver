@@ -70,7 +70,7 @@ Matrice multiply(Matrice const &mat1, Matrice const &mat2) //mat1*mat2 //permet 
     if (mat1.getcolonne() == mat2.getligne()) //test de validité des 2 matrices en paramètre
     {
         Matrice temp(mat1.getligne(), mat2.getcolonne());
-        double val;
+        double val = 0;
 
         for (int i = 0; i < temp.getligne(); i++) // nombre de tour de boucle a faire
         {
