@@ -13,11 +13,12 @@ Poly4::Poly4(double a, double b, double c, double d, double e) :
 {
 
 }
+//Fonction bicarre, plus rapide que d'utiliser la methode classique pour resoudre un polynome de degree 2
 void Poly4::bicar(double a, double c) {
 	double delta = -4 * a * c;
 	if (delta<0) {
 		//pas de solution
-		std::cout << "Pas de solution" << std::endl;
+		//std::cout << "Pas de solution" << std::endl;
 	}
 	else {
 		delta = sqrt(delta);
@@ -44,23 +45,18 @@ void Poly4::bicar(double a, double c) {
 			x4 = -x3; 
 		}
 		if (t12 && t22) {
-			//std::cout << "Il y a 4 racines : " << std::endl;
-			m_racines[0] = x1;
-			m_racines[1] = x2;
-			m_racines[2] = x3;
-			m_racines[3] = x4;
+			m_racine.push_back(x1);
+			m_racine.push_back(x2);
+			m_racine.push_back(x3);
+			m_racine.push_back(x4);
 		}
 		else if (t12) {
-			m_racines[0] = x1;
-			m_racines[1] = x2;
-			//std::cout << "Il y a 2 racines : " << std::endl;
-			//std::cout << "X1 : " << x1 <<"X2 : "<<x2<< std::endl;
+			m_racine.push_back(x1);
+			m_racine.push_back(x2);
 		}
 		else if (t22) {
-			m_racines[0] = x3;
-			m_racines[1] = x4;
-			//std::cout << "Il y a 2 racines : " << std::endl;
-			//std::cout << "X1 : " <<x3<<"X2 : "<<x4<< std::endl;
+			m_racine.push_back(x3);
+			m_racine.push_back(x4);
 		}
 	}
 }
@@ -70,44 +66,35 @@ void Poly4::ferrrari()
 	double B = ((pow(m_b / 2, 3)) / pow(m_a, 3)) - ((0.5 * m_c * m_b) / pow(m_a, 2)) + (m_d / m_a);
 	double C = (-3 * pow(m_b / (4 * m_a), 4)) + ((m_c * pow(m_b / 4, 2)) / pow(m_a, 3)) - ((0.25 * m_b * m_d) / pow(m_a, 2)) + (m_e / m_a);
 
-	//std::cout << "A = " << A << "\n B = " << B << "\n C = " << C << std::endl;
-	//Equation bicarr�e de la forme X^4+AX^2+C =0 avec X^2 = Y
+	//Equation bicarree de la forme X^4+AX^2+C =0 avec X^2 = Y
 	if (B == 1e-14) {
 		std::cout << "Solution bicarre" << std::endl;
 		bicar(A, C);
 
 	}
 	else {
-		//Resolution du degr�e 3
+		//Resolution du degree 3
 		double a = 1;
 		double b = -A;
 		double c = -4 * C;
 		double d = 4 * A * C - pow(B, 2);
 		double bs = m_b / 4 / m_a;
 		Poly3 p3(a, b, c, d);
-		//std::cout << "Racines de la forme du polynome " << std::endl;
 		p3.cardan();
 		double racinesCardan[3];
 		p3.getRacines(racinesCardan);
 
 		double p = (c / a) - (pow(b, 2.0)) / (3.0 * pow(a, 2.0));
 		double r = sqrt(-p / 3);
-		//std::cout << "p = " << p << std::endl;
 		double u;
-		//for (int i = 0; i < 2; i++) {
-		//	std::cout << "racines p3 x = " << racinesCardan[i] << std::endl;
-		//}
-		//si nb racines > 1
 		if (sizetab(racinesCardan) > 1) {
 			bool end = false;
 			if (r == 0) {
 				u = racinesCardan[0];
-				//endFerrari();
 				end = true;
 			}
 			if (racinesCardan[0] > A && end == false) {
 				u = racinesCardan[0];
-				//endFerrari();
 				end = true;
 			}
 			if(end == false)
@@ -118,18 +105,13 @@ void Poly4::ferrrari()
 			}
 			
 		}
-		else { //si nb racines =1
+		else { //si le nombre de racines = 1
 			u = racinesCardan[0];
 		}
 
-		//endFerrari
+		//Resolution polynome Degree 2
 		double uma = u - A;
 		double z = B / (2 * uma);
-		//std::cout << "z = " << z << std::endl;  //z pas la bonne valeur
-		//std::cout << "u-A = " << uma << std::endl;
-
-		//R�solution polynome Degr�e 2
-		
 		double d1 = uma - 4 * (z * sqrt(uma) + u / 2);
 		double t1 = 0;
 		double x1, x2, x3, x4 = 0;
@@ -147,42 +129,27 @@ void Poly4::ferrrari()
 			x4 = (-sqrt(uma) - sqrt(d2)) / 2 - bs ;
 			t2 = 1;
 		}
-		if (t1==0 && t2 == 0) {
-			std::cout << "\n!!Pas de solutions pour degre 4 !!\n" << std::endl;
-
+		if (t1==0 && t2 == 0) { //On a pas de solution pour ce polynome
+			//std::cout << "\n!!Pas de solutions pour degre 4 !!\n" << std::endl;
 		}
 		if (t1 * t2 == 0 && (t1 == 1 || t2 ==1))
 		{
-			//std::cout << "\nDeux solutions" << std::endl;
-			
+			//Nous avons 2 solutions
 			if (t1 == 1) {
 				m_racine.push_back(x1);
 				m_racine.push_back(x2);
-				//m_racines[1] = x2;
-				//std::cout << "x1 = " << x1 << "\nx2 = " << x2 << std::endl;
 			}
 			if (t2 == 1) {
 				m_racine.push_back(x3);
 				m_racine.push_back(x4);
-				//m_racines[0] = x3;
-				//m_racines[1] = x4;
-				//std::cout << "x1 = " << x3 << "\nx2 = " << x4 << std::endl;
 			}
-		}
+		} //Nous avons 4 solutions
 		else if (t1 ==1 && t2 ==1)
 		{
 			m_racine.push_back(x1);
 			m_racine.push_back(x2);
 			m_racine.push_back(x3);
 			m_racine.push_back(x4);
-			//m_racines[0] = x1;
-			//m_racines[1] = x2;
-			//m_racines[2] = x3;
-			//m_racines[3] = x4;
-			//std::cout << "\nQuatre solutions!!!" << std::endl;
-			//std::cout << "x1 = " << x1 << "\nx2 = " << x2 << std::endl;
-			//std::cout << "x3 = " << x3 << "\nx4 = " << x4 << std::endl;
-
 		}
 	}
 }

@@ -12,54 +12,41 @@ Poly5::Poly5(double a, double b, double c, double d, double e, double f) :
 
 void Poly5::solve()
 {
-	// Division des coefficients par a si a != 1
-	if (m_a != 1.0)
-	{
-		m_b /= m_a;
-		m_c /= m_a;
-		m_d /= m_a;
-		m_e /= m_a;
-		m_f /= m_a;
-		m_a /= m_a;
-	}
-	else {
-		//Degree 4 et pas degree 5
-	}
+	//On divise les quotients par a
+	m_b /= m_a;
+	m_c /= m_a;
+	m_d /= m_a;
+	m_e /= m_a;
+	m_f /= m_a;
+	m_a /= m_a;
 
 	double x0, equation[6] = { m_f, m_e, m_d, m_c, m_b, m_a };
 	x0 = Newton(equation, 5, 0.5);
-	//printf("Une racine a ete trouvee : x1 = %lf\r\n\n", x0);
 	m_racine.push_back(x0);
-	double polynome[5];
-	/* Factorisation par la m�thode de Horner */
+	//double polynome[5];
+
+	// On Factorisation par la methode de Horner 
+	/*
 	polynome[4] = m_a;
 	polynome[3] = m_b + polynome[4] * x0;
 	polynome[2] = m_c + polynome[3] * x0;
 	polynome[1] = m_d + polynome[2] * x0;
-	polynome[0] = m_e + polynome[1] * x0;
+	polynome[0] = m_e + polynome[1] * x0;*/
 
+	double Hm_a = m_a;
+	double Hm_b = m_b + Hm_a * x0;
+	double Hm_c = m_c + Hm_b * x0;
+	double Hm_d = m_d + Hm_c * x0;
+	double Hm_e = m_e + Hm_d * x0;
 
-	//printf("On factorise le polynome par la racine trouvee :\r\n\n");
 /*
-	if (x0 < 0.0)
-	{
-		printf("(x+%lf)(", -x0);
-	}
-	else
-	{
-		printf("(x-%lf)(", x0);
-	}
-*/
-	//afficheEquation('x', polynome, 4, 0);
-	//printf(") = 0\r\n\n");
-
-	//degre4(polynome[4], polynome[3], polynome[2], polynome[1], polynome[0], variable, 'z', 'y', x0);
 	double a = polynome[4];
 	double b = polynome[3];
 	double c = polynome[2];
 	double d = polynome[1];
-	double e = polynome[0];
-	Poly4 p4(a, b, c, d, e);
+	double e = polynome[0];*/
+
+	Poly4 p4(Hm_a, Hm_b, Hm_c, Hm_d, Hm_e);
 	p4.ferrrari();
 	int nbRacinedeg4 = p4.getRacines().size();
 	for (int i = 0; i < nbRacinedeg4; i++)
@@ -68,8 +55,6 @@ void Poly5::solve()
 	}
 	//m_racine.insert(m_racine.end(),p4.getRacines().begin(),p4.getRacines().end()); Cette methode ne marche pas tous le temps ATTENTION !!
 }
-
-
 
 double Poly5::calculPoly(double polynome[6], int degree, double x) {
 	double P = 0.0, S = 0.0;
@@ -82,7 +67,6 @@ double Poly5::calculPoly(double polynome[6], int degree, double x) {
 	return P;
 }
 
-// Quand tous les coefficients sont superieur a 0
 double Poly5::Newton(double polynome[6], int degree, double x0) {
 	double polynomeDeriv[6] = { 0.0 };
 	int cpt, p;
@@ -138,58 +122,6 @@ double Poly5::Newton(double polynome[6], int degree, double x0) {
 
 	// printf("P = %lf\r\nP2 = %lf\r\nx%i = %lf\r\n\n", P, P2, n, xi);
 	return xi;
-}
-
-//Permet d'afficher une equation intermediaire, utilisation des fonctionss du language C
-void Poly5::afficheEquation(char variable, double equation[6], int degree, int afficheZero = 1)
-{
-	int n;
-	for (n = degree; n > 0; n--)
-	{
-		if (equation[n] != 0.0)
-		{
-			if (equation[n] == 1.0)
-			{
-				printf("%c", variable);
-			}
-			else if (equation[n] == -1.0)
-			{
-				printf("-%c", variable);
-			}
-			else
-			{
-				printf("%lf%c", equation[n], variable);
-			}
-
-			if (n > 1)
-			{
-				printf("^%i", n);
-			}
-		}
-
-		if (equation[n - 1] > 0)
-		{
-			printf("+");
-		}
-	}
-
-	if (equation[0] == 1.0)
-	{
-		printf("1");
-	}
-	else if (equation[0] == -1.0)
-	{
-		printf("-1");
-	}
-	else if (equation[0] != 0.0)
-	{
-		printf("%lf", equation[0]);
-	}
-
-	if (afficheZero == 1)
-	{
-		printf(" = 0\r\n\n");
-	}
 }
 
 //Permet d'afficher les racines
