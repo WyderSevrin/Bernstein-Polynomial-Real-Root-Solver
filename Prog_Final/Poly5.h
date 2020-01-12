@@ -1,8 +1,9 @@
-#pragma once
+#ifndef POLY5_H
+#define POLY5_H
+
 #include <math.h>
 #include "Poly4.h"
 #include "Poly3.h"
-#include "Poly2.h"
 
 class Poly5
 {
@@ -27,3 +28,4 @@ private :
 	void afficheEquation(char variable, double equation[6], int degree, int afficheZero);
 };
 
+#endif

@@ -1,12 +1,12 @@
-#pragma once
+#ifndef POLY4_H
+#define POLY4_H
 
 #include <iostream>
 #include <math.h>
 #include "Poly3.h"
-#include "Poly2.h"
+
 class Poly4
 {
-	
 
 public:
 	Poly4(double a, double b, double c, double d, double e);
@@ -26,3 +26,4 @@ private:
 	std::vector<double> m_racine;
 };
 
+#endif

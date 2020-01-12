@@ -157,7 +157,7 @@ void Poly4::afficherRacines(){
 	int nbRacines = m_racine.size();
 	std::cout<<"Il y a "<<nbRacines<<" racines"<<std::endl;
 	for(int i = 0; i<nbRacines;i++){
-		std::cout<<"X"<<i+1<<" = "<<m_racine.at(i)<<std::endl;
+		std::cout<<"|X"<<i+1<<" = "<<m_racine.at(i)<<std::endl;
 	}
 }
 std::vector<double> Poly4::getRacines(){

@@ -1,7 +1,10 @@
-#pragma once
+#ifndef POLY3_H
+#define POLY3_H
+
 #include <math.h>
 #include <vector>
 #include <iostream>
+
 class Poly3
 {
 public:
@@ -26,3 +29,4 @@ private:
 
 };
 
+#endif
