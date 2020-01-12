@@ -15,33 +15,33 @@ Poly4::Poly4(double a, double b, double c, double d, double e) :
 }
 //Fonction bicarre, plus rapide que d'utiliser la methode classique pour resoudre un polynome de degree 2
 void Poly4::bicar(double a, double c) {
-	double delta = -4 * a * c;
+	//On a =1 , b=A , c=C
+	double delta =pow(a,2) -4  * c;
 	if (delta<0) {
 		//pas de solution
 		//std::cout << "Pas de solution" << std::endl;
 	}
 	else {
-		delta = sqrt(delta);
-		double x12 = (-a + delta) / 2;
-		double x32 = (-a - delta) / 2;
-		bool t12 = 0;
-		bool t22 = 0;
+		double Z1 = (-a + sqrt(delta)) /2;
+		double Z2 = (-a - sqrt(delta)) /2;
+		bool t12 = false;
+		bool t22 = false;
 		
 		double x1, x2, x3, x4 = 0;
 
-		if (x12 >= 0) { 
-			x1 = sqrt(x12); 
+		if (Z1 >= 0) { 
+			x1 = sqrt(Z1); 
 			x2 = -x1; 
 			
-			t12 = 1;
+			t12 = true;
 		}
-		if (x32 >= 0 && t12 == 1) { 
-			x3 = sqrt(x32); 
+		if (Z2 >= 0 && Z1 >= 0) { 
+			x3 = sqrt(Z2); 
 			x4 = -x3; 
-			t22 = 1;
+			t22 = true;
 		}
-		if (x32 >= 0) { 
-			x3 = sqrt(x32); 
+		if (Z2 >= 0) { 
+			x3 = sqrt(Z2); 
 			x4 = -x3; 
 		}
 		if (t12 && t22) {
@@ -66,11 +66,15 @@ void Poly4::ferrrari()
 	double B = ((pow(m_b / 2, 3)) / pow(m_a, 3)) - ((0.5 * m_c * m_b) / pow(m_a, 2)) + (m_d / m_a);
 	double C = (-3 * pow(m_b / (4 * m_a), 4)) + ((m_c * pow(m_b / 4, 2)) / pow(m_a, 3)) - ((0.25 * m_b * m_d) / pow(m_a, 2)) + (m_e / m_a);
 
+	std::cout<<"A :"<< A <<std::endl;
+	std::cout<<"B :"<< B <<std::endl;
+	std::cout<<"C :"<< C <<std::endl;
+
+
 	//Equation bicarree de la forme X^4+AX^2+C =0 avec X^2 = Y
-	if (B == 1e-14) {
+	if (B <= 1e-14 && B>= -1e-14) { // On arrondie autour de 0
 		std::cout << "Solution bicarre" << std::endl;
 		bicar(A, C);
-
 	}
 	else {
 		//Resolution du degree 3

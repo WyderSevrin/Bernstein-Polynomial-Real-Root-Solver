@@ -9,12 +9,6 @@
 #include "Poly5.h"
 #include "Bernstein.h"
 
-/*while (a == 0)
-{
-	std::cout << "a doit pas etre 0, reprendre a :\n";
-	std::cin >> a;
-}*/
-
 int main()
 {
 	std::string quit = "";
@@ -34,10 +28,10 @@ int main()
 			choixmenu1 = "";
 			choixmenu2 = "";
 			choixmenu3 = "";
-			std::cout << "|=========================================================================================\n";
-			std::cout << "|===================== Resolution d'equation du 3eme au 5eme degree ======================\n";
-			std::cout << "|=========================================================================================\n|\n";
-			std::cout << "|Ecriver 1 pour des exemple 2 pour entrer polynome quelconque\n|" << std::endl;
+			std::cout << "|=========================================================================================|\n";
+			std::cout << "|===================== Resolution d'equation du 3eme au 5eme degree ======================|\n";
+			std::cout << "|=========================================================================================|\n|\n";
+			std::cout << "|Ecriver 1 pour des exemples, 2 pour entrer un polynome quelconque\n|" << std::endl;
 			std::cout << "|1_Exemples" << std::endl;
 			std::cout << "|2_Polynome quelconque" << std::endl;
 			std::cout << "|3_Fermer l'application\n|" << std::endl;
