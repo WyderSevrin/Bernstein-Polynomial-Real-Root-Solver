@@ -65,10 +65,10 @@ void Bernstein::rootfinder(Matrice controlpoint, Intervalle intervalle, double p
             double offset = coordYpointgauche - pente * coordXpointgauche;                                                           //on calcul "b" de y=ax+b
             double root = -1.0 * (offset / pente);                                                                                   //on calcul pour y=0 donc 0=-(b/a) ce qui donne la racine
 
-            /*if (root != root) //si la valeur de la racine n'est pas defini alors on rentre dans le if car (a != nan) est toujours vrai
+            if (root != root) //si la valeur de la racine n'est pas defini alors on rentre dans le if car (a != nan) est toujours vrai
             {
                 root = (intervalle.getgauche() + intervalle.getdelta() / 2); //on prend le milieu de l'intervalle
-            }*/
+            }
             m_racine.push_back(root); //on ecrit la racine dans le tableau
         }
     }
