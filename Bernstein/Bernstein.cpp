@@ -10,9 +10,7 @@ void Bernstein::rootfinder(Matrice controlpoint, Intervalle intervalle, double p
     int compteur = 0;
     double indiceG = 0.0;
     double indiceD = 0.0;
-    /* controlpoint.showmat();
-    intervalle.showintervalle();
-    std::cout << std::endl;*/
+
     //test racine et racine multiple genre  1 -1 1 -1 racine multiple et racine // + coorY des point// attention au 0
 
     for (int i = 0; i < (controlpoint.getligne() - 1); i++) //on parcourt les points de controle du polynome de bernstein
