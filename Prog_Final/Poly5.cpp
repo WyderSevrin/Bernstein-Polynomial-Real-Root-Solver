@@ -103,16 +103,14 @@ double Poly5::Newton(double polynome[6], int degree, double x0) {
 		{
 			xi = -x0;
 		}
-	} while ((Pverif > 1.0 && Pverif2 >= 0) && n < 10000);
-
-	// printf("P = %lf\r\nP2 = %lf\r\nx%i = %lf\r\n\n", P, P2, n, xi);
+	} while ((Pverif > 1.0 && Pverif2 >= 0) && n < 100000);
 	return xi;
 }
 
 //Permet d'afficher les racines
 void Poly5::afficherRacines(){
 	int nbRacines = m_racine.size();
-	std::cout<<"Il y a "<<nbRacines<<" racines"<<std::endl;
+	std::cout<<"|Il y a "<<nbRacines<<" racines"<<std::endl;
 	for(int i = 0; i<nbRacines;i++){
 		std::cout<<"|X"<<i+1<<" = "<<m_racine.at(i)<<std::endl;
 	}

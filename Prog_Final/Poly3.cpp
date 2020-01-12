@@ -116,7 +116,7 @@ void Poly3::getRacines(double racines[])
 //Permet d'afficher les racines
 void Poly3::afficherRacines(){
 	int nbRacines = m_racine.size();
-	std::cout<<"Il y a "<<nbRacines<<" racines"<<std::endl;
+	std::cout<<"|Il y a "<<nbRacines<<" racines"<<std::endl;
 	for(int i = 0; i<nbRacines;i++){
 		std::cout<<"|X"<<i+1<<" = "<<m_racine.at(i)<<std::endl;
 	}

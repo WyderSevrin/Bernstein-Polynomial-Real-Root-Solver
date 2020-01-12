@@ -65,11 +65,9 @@ void Poly4::ferrrari()
 	double A = (-3 * pow(m_b, 2)) / (8 * pow(m_a, 2)) + (m_c / m_a);
 	double B = ((pow(m_b / 2, 3)) / pow(m_a, 3)) - ((0.5 * m_c * m_b) / pow(m_a, 2)) + (m_d / m_a);
 	double C = (-3 * pow(m_b / (4 * m_a), 4)) + ((m_c * pow(m_b / 4, 2)) / pow(m_a, 3)) - ((0.25 * m_b * m_d) / pow(m_a, 2)) + (m_e / m_a);
-
-	std::cout<<"A :"<< A <<std::endl;
-	std::cout<<"B :"<< B <<std::endl;
-	std::cout<<"C :"<< C <<std::endl;
-
+	//std::cout<<"A :"<< A <<std::endl;
+	//std::cout<<"B :"<< B <<std::endl;
+	//std::cout<<"C :"<< C <<std::endl;
 
 	//Equation bicarree de la forme X^4+AX^2+C =0 avec X^2 = Y
 	if (B <= 1e-14 && B>= -1e-14) { // On arrondie autour de 0
@@ -159,7 +157,7 @@ void Poly4::ferrrari()
 }
 void Poly4::afficherRacines(){
 	int nbRacines = m_racine.size();
-	std::cout<<"Il y a "<<nbRacines<<" racines"<<std::endl;
+	std::cout<<"|Il y a "<<nbRacines<<" racines"<<std::endl;
 	for(int i = 0; i<nbRacines;i++){
 		std::cout<<"|X"<<i+1<<" = "<<m_racine.at(i)<<std::endl;
 	}
