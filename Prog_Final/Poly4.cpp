@@ -75,11 +75,8 @@ void Poly4::ferrrari()
 
 
 	//Equation bicarree de la forme X^4+AX^2+C =0 avec X^2 = Y
-<<<<<<< HEAD
-	if (B <= 1e-14 && B>= -1e-14) {
-=======
 	if (B <= 1e-14 && B>= -1e-14) { // On arrondie autour de 0
->>>>>>> MenuV2
+
 		std::cout << "Solution bicarre" << std::endl;
 		
 		bicar(A, C);
