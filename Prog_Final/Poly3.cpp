@@ -24,7 +24,7 @@ Poly3::Poly3(double a, double b, double c, double d) :
 void Poly3::cardan()
 {
 	// les variables utilis�e //
-	double p, q, det, u = 0;
+	double p, q, delta, u = 0;
 
 	// les trois solutions avec le nombre de sol. //
 	double X1 = 0;
@@ -33,29 +33,29 @@ void Poly3::cardan()
 
 	p = (m_c / m_a) - (pow(m_b, 2.0)) / (3.0 * pow(m_a, 2.0));
 	q = (2.0 * pow(m_b, 3.0)) / (27.0 * pow(m_a, 3.0)) - (m_b * m_c) / (3.0 * pow(m_a, 2.0)) + m_d / m_a;
-	det = pow(q, 2) / 4 + pow(p, 3) / 27;
+	delta = pow(q, 2) / 4 + pow(p, 3) / 27;
 
 	//Encadrement du determinant quand celui-ci est trop petit on le met a 0, permet d'arrondire autour de 0
-	if((det < 1.3e-15  )&&(det > -1.3e-15 )){
-		det = 0;
+	if((delta < 1.3e-15  )&&(delta > -1.3e-15 )){
+		delta = 0;
 	}
 	
-	if (det > 0) //On obtient 1 racine
+	if (delta > 0) //On obtient 1 racine
 	{
 		/* le teste suivant est utile car le c++ (comme le vb)
 		 ne savent pas faire des racine cubique negatives ...*/
-		if (sgn(-q * 0.5 + pow(det, 0.5)) == 1)
+		if (sgn(-q * 0.5 + pow(delta, 0.5)) == 1)
 		{
-			u = pow((-q * 0.5 + pow(det, 0.5)), (1. / 3.));
+			u = pow((-q * 0.5 + pow(delta, 0.5)), (1. / 3.));
 		}
 		else
 		{
-			u = -pow(-(-q * 0.5 + pow(det, 0.5)), (1. / 3.));
+			u = -pow(-(-q * 0.5 + pow(delta, 0.5)), (1. / 3.));
 		}
 		X1 = -m_b / (3.0 * m_a) + u - (p / (3. * u));
 		m_racine.push_back(X1);
 	}
-	else if (det == 0)
+	else if (delta == 0)
 	{
 		//Une racine simple et une racine double
 		if(p<0){
@@ -79,7 +79,7 @@ void Poly3::cardan()
 			m_racine.push_back(X1);
 			m_racine.push_back(X1);
 		}
-	}else if (det < 0){
+	}else if (delta < 0){
 
 		double r = sqrt(-pow(p,3) / 27);		
 		double t = 1. / 3. * acos(-q / (2. * r));
