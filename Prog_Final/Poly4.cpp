@@ -20,8 +20,12 @@ void Poly4::bicar(double a, double c) {
 	if (delta<0) {
 		//pas de solution
 		//std::cout << "Pas de solution" << std::endl;
-	}
-	else {
+	}else if(delta == 0){
+		double Z = -a/(2);
+		double x1 = sqrt(Z);
+		m_racine.push_back(x1);
+		m_racine.push_back(-x1);
+	}else{
 		double Z1 = (-a + sqrt(delta)) /2;
 		double Z2 = (-a - sqrt(delta)) /2;
 		bool t12 = false;
@@ -60,6 +64,10 @@ void Poly4::bicar(double a, double c) {
 		}
 	}
 }
+
+
+
+
 void Poly4::ferrrari()
 {
 	double A = (-3 * pow(m_b, 2)) / (8 * pow(m_a, 2)) + (m_c / m_a);
