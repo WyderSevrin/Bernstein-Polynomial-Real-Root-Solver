@@ -9,8 +9,16 @@
 #include "Poly5.h"
 #include "Bernstein.h"
 
+void presstocontinue()
+{
+	std::cout << "Entrer n'importe quoi pour continuer" << std::endl;
+	std::cin.ignore();
+	std::cin.ignore();
+}
+
 int main()
 {
+
 	std::string quit = "";
 	std::string exit = "";
 	std::string choixmenu1 = "";
@@ -25,6 +33,7 @@ int main()
 
 		if (menu == "1")
 		{
+
 			choixmenu1 = "";
 			choixmenu2 = "";
 			choixmenu3 = "";
@@ -40,6 +49,7 @@ int main()
 		}
 		if (choixmenu1 == "1")
 		{
+
 			menu = "0";
 			std::cout << "|=========================================================================================|\n";
 			std::cout << "|=========================================Exemple=========================================|\n";
@@ -63,60 +73,61 @@ int main()
 				std::cin >> choixEqua;
 				if (choixEqua == 1)
 				{
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Cardan" << std::endl;
 					Poly3 poly3(1, -1, -1, 1);
 					poly3.cardan();
 					poly3.afficherRacines();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Bernstein" << std::endl;
 					Bernstein poly(1, -1, -1, 1);
 					poly.root(0.0000001);
 					poly.showracine();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 				}
 				else if (choixEqua == 2)
 				{
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Cardan" << std::endl;
 					Poly3 poly3(4, -5, -23, 6);
 					poly3.cardan();
 					poly3.afficherRacines();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Bernstein" << std::endl;
 					Bernstein poly(4, -5, -23, 6);
 					poly.root(0.0000001);
 					poly.showracine();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 				}
 				else if (choixEqua == 3)
 				{
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Cardan" << std::endl;
 					Poly3 poly3(2, 15, 24, -16);
 					poly3.cardan();
 					poly3.afficherRacines();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Bernstein" << std::endl;
 					Bernstein poly(2, 15, 24, -1);
 					poly.root(0.0000001);
 					poly.showracine();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 				}
 				else if (choixEqua == 4)
 				{
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Cardan" << std::endl;
 					Poly3 poly3(1, 3, 5, 6);
 					poly3.cardan();
 					poly3.afficherRacines();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Bernstein" << std::endl;
 					Bernstein poly(1, 3, 5, 6);
 					poly.root(0.0000001);
 					poly.showracine();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 				}
+				presstocontinue();
 			}
 			if (choixmenu2 == "2")
 			{
@@ -131,60 +142,61 @@ int main()
 				std::cout << "|\n";
 				if (choixEqua == 1)
 				{
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Ferrari" << std::endl;
 					Poly4 poly4(3, 45, -24, -150, 4);
 					poly4.ferrrari();
 					poly4.afficherRacines();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Bernstein" << std::endl;
 					Bernstein poly(3, 45, -24, -150, 4);
 					poly.root(0.0000001);
 					poly.showracine();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 				}
 				else if (choixEqua == 2)
 				{
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Ferrari" << std::endl;
 					Poly4 poly4(2567, -248, -123, 68, 854);
 					poly4.ferrrari();
 					poly4.afficherRacines();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Bernstein" << std::endl;
 					Bernstein poly(2567, -248, -123, 68, 854);
 					poly.root(0.0000001);
 					poly.showracine();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 				}
 				else if (choixEqua == 3)
 				{
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Ferrari" << std::endl;
 					Poly4 poly4(-653, 234, -24, -955, 12);
 					poly4.ferrrari();
 					poly4.afficherRacines();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Bernstein" << std::endl;
 					Bernstein poly(-653, 234, -24, -955, 12);
 					poly.root(0.0000001);
 					poly.showracine();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 				}
 				else if (choixEqua == 4)
 				{
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Ferrari" << std::endl;
 					Poly4 poly4(24, 34, -345, -12, 45);
 					poly4.ferrrari();
 					poly4.afficherRacines();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Bernstein" << std::endl;
 					Bernstein poly(24, 34, -345, -12, 45);
 					poly.root(0.0000001);
 					poly.showracine();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 				}
+				presstocontinue();
 			}
 			if (choixmenu2 == "3")
 			{
@@ -200,60 +212,61 @@ int main()
 				std::cout << "|\n";
 				if (choixEqua == 1)
 				{
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Newton" << std::endl;
 					Poly5 p5(24, -67, 45, -24, -150, 4);
 					p5.solve();
 					p5.afficherRacines();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Bernstein" << std::endl;
 					Bernstein poly(24, -67, 45, -24, -150, 4);
 					poly.root(0.0000001);
 					poly.showracine();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 				}
 				else if (choixEqua == 2)
 				{
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Newton" << std::endl;
 					Poly5 p5(-567, 237, -248, -153, 68, 54);
 					p5.solve();
 					p5.afficherRacines();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Bernstein" << std::endl;
 					Bernstein poly(-567, 237, -248, -153, 68, 54);
 					poly.root(0.0000001);
 					poly.showracine();
-					std::cout<<"\n|";
+					std::cout << "\n|";
 				}
 				else if (choixEqua == 3)
 				{
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Newton" << std::endl;
 					Poly5 p5(765, -653, 234, 24, -955, 12);
 					p5.solve();
 					p5.afficherRacines();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Bernstein" << std::endl;
 					Bernstein poly(765, -653, 234, 24, -955, 12);
 					poly.root(0.0000001);
 					poly.showracine();
-					std::cout<<"\n|";
+					std::cout << "\n|";
 				}
 				else if (choixEqua == 4)
 				{
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Newton" << std::endl;
 					Poly5 p5(-2, 24, 34, -345, -182, 45);
 					p5.solve();
 					p5.afficherRacines();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 					std::cout << "Methode de Bernstein" << std::endl;
 					Bernstein poly(-2, 24, 34, -345, -182, 45);
 					poly.root(0.0000001);
 					poly.showracine();
-					std::cout<<"|\n|";
+					std::cout << "|\n|";
 				}
+				presstocontinue();
 			}
 			if (choixmenu2 == "4")
 			{
@@ -292,17 +305,18 @@ int main()
 				std::cin >> c;
 				std::cout << "|d : ";
 				std::cin >> d;
-				std::cout<<"|\n|";
+				std::cout << "|\n|";
 				std::cout << "Methode de Cardan" << std::endl;
 				Poly3 poly3(a, b, c, d);
 				poly3.cardan();
 				poly3.afficherRacines();
-				std::cout<<"|\n|";
+				std::cout << "|\n|";
 				std::cout << "Methode de Bernstein" << std::endl;
 				Bernstein poly(a, b, c, d);
 				poly.root(0.0000001);
 				poly.showracine();
-				std::cout<<"|\n|";
+				std::cout << "|\n|";
+				presstocontinue();
 			}
 			if (choixmenu3 == "2")
 			{
@@ -325,17 +339,18 @@ int main()
 				std::cin >> d;
 				std::cout << "|e : ";
 				std::cin >> e;
-				std::cout<<"|\n|";
+				std::cout << "|\n|";
 				std::cout << "Methode de Ferrari" << std::endl;
 				Poly4 poly4(a, b, c, d, e);
 				poly4.ferrrari();
 				poly4.afficherRacines();
-				std::cout<<"|\n|";
+				std::cout << "|\n|";
 				std::cout << "Methode de Bernstein" << std::endl;
 				Bernstein poly(a, b, c, d, e);
 				poly.root(0.0000001);
 				poly.showracine();
-				std::cout<<"|\n|";
+				std::cout << "|\n|";
+				presstocontinue();
 			}
 			if (choixmenu3 == "3")
 			{
@@ -360,18 +375,20 @@ int main()
 				std::cin >> e;
 				std::cout << "|f : ";
 				std::cin >> f;
-				std::cout<<"|\n|";
+				std::cout << "|\n|";
 				std::cout << "Methode de Newton" << std::endl;
 				Poly5 p5(a, b, c, d, e, f);
 				p5.solve();
 				p5.afficherRacines();
-				std::cout<<"|\n|";
+				std::cout << "|\n|";
 				std::cout << "Methode de Bernstein" << std::endl;
 				Bernstein poly(a, b, c, d, e, f);
 				poly.root(0.0000001);
 				poly.showracine();
-				std::cout<<"|\n|";
+				std::cout << "|\n|";
+				presstocontinue();
 			}
+
 			if (choixmenu3 == "4")
 			{
 				choixmenu1 = "0";
@@ -383,6 +400,6 @@ int main()
 		{
 			quit = "3";
 		}
-		}
+	}
 	return 0;
 }
