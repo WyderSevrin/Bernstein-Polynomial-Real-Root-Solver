@@ -4,7 +4,6 @@ void Bernstein::rootfinder(Matrice controlpoint, Intervalle intervalle, double p
 {
 
     bool racine = false;
-    bool racinemultiple = false;
     double coordYpointgauche = 0;
     double coordYpointdroite = 0;
     int compteur = 0;
@@ -36,16 +35,12 @@ void Bernstein::rootfinder(Matrice controlpoint, Intervalle intervalle, double p
             compteur++;  //si il a plusieurs racines dans l'intervalle on
         }
     }
-    if (compteur > 1) //on teste si il y a plusieurs racines dans l'intervalle
-    {
-        racinemultiple = true;
-    }
-    //
 
     if (racine == true) //on teste si il y a une racine dans l'intervalle
     {
+
         // on arrete de calculer les nouveaux intervalles si on dépasser la précision ou si il y a plusieurs racines dans l'intervalle et le nombre maximum d'iteration
-        if (((intervalle.getdelta() > precision) || (racinemultiple == true)) && (m_maxiteration > m_iteration))
+        if ((intervalle.getdelta() > precision) && (m_maxiteration > m_iteration))
         {
 
             m_iteration++;                                                   //on incremmente m_iteration car on doit pour limiter le nombre de division de l'intervalle
@@ -67,7 +62,10 @@ void Bernstein::rootfinder(Matrice controlpoint, Intervalle intervalle, double p
             {
                 root = (intervalle.getgauche() + intervalle.getdelta() / 2); //on prend le milieu de l'intervalle
             }
-            m_racine.push_back(root); //on ecrit la racine dans le tableau
+            for (int rmulti = 0; rmulti < compteur; rmulti++)
+            {                             //pour voir les racines double
+                m_racine.push_back(root); //on ecrit la racine dans le tableau
+            }
         }
     }
 }
