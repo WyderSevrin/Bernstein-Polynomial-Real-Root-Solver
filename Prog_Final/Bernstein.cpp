@@ -93,11 +93,12 @@ void Bernstein::root(double precision) //permet de trouver les racines via la fo
 
 void Bernstein::showracine()
 {
-    std::cout << "il y a " << m_racine.size() << " racines" << std::endl;
+    std::cout << "|il y a " << m_racine.size() << " racines" << std::endl;
     for (unsigned int i = 0; i < m_racine.size(); i++) //parcourt toutes les cases du tableau
     {
-        std::cout << " racine " << i + 1 << " : " << m_racine[i] << " " << std::endl;
+        std::cout << "| racine " << i + 1 << " : " << m_racine[i] << " " << std::endl;
     }
+    std::cout << "|Il y a eu " << m_iteration << " subdivision" << std::endl;
 }
 
 //la methode des constructeurs est identique il n'y a que les matrices qui sont plus grandes
