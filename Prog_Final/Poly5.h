@@ -12,7 +12,7 @@ public :
 	Poly5(double a, double b, double c, double d, double e, double f);
 	void solve();
 	double Newton(double polynome[6], int degree, double x0);
-	double calculPoly(double polynome[6], int degree, double x);
+	double calculduPoly(double polynome[6], int degree, double x);
 	void afficherRacines();
 private :
 	

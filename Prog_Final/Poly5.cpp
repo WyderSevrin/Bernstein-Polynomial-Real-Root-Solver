@@ -41,13 +41,16 @@ void Poly5::solve()
 	//m_racine.insert(m_racine.end(),p4.getRacines().begin(),p4.getRacines().end()); Cette methode ne marche pas tous le temps ATTENTION !!
 }
 
-double Poly5::calculPoly(double polynome[6], int degree, double x) {
+/*
+	Permet de faire un calcule intermediaire pour f/f' + r; ici on calcule f
+*/
+double Poly5::calculduPoly(double polynome[6], int degree, double x) {
 	double P = 0.0, S = 0.0;
 	int cpt;
 	for (cpt = degree; cpt >= 0; cpt--)
 	{
 		S = polynome[cpt] * pow(x, cpt);
-		P = P + S;
+		P += S;
 	}
 	return P;
 }
@@ -57,9 +60,10 @@ double Poly5::Newton(double polynome[6], int degree, double x0) {
 	int cpt, p;
 	double xi, P = 0.0, P2 = 0.0, Pverif, Pverif2, Xi;
 	xi = x0;
-	int n = 0;
+	int n = 0; //Nombre d'incrementation, generalement pas besoins d'etre trop elevee
 
 	p = degree - 1;
+	//On fait la deriver du polynome
 	for (cpt = p; cpt > 0; cpt--)
 	{
 		polynomeDeriv[cpt - 1] = polynome[cpt] * cpt;
@@ -68,16 +72,19 @@ double Poly5::Newton(double polynome[6], int degree, double x0) {
 	do
 	{
 		n += 1;
-		P = calculPoly(polynome, degree, xi);
-		P2 = calculPoly(polynomeDeriv, p, xi);
-		if (P < 0.0 && P2 < 0.0)
+		P = calculduPoly(polynome, degree, xi);//Calcule de f
+		P2 = calculduPoly(polynomeDeriv, p, xi);//Calcule de f'
+
+		//xi est une valeur absolu, ou plutot P/P2
+		if ((P < 0.0 && P2 < 0.0 )||(P > 0.0 && P2 > 0.0))
 		{
-			xi = xi + P / P2;
+			xi = xi + P / P2; //  ---> polynome/polynomeDerive + racineTemp
 		}
 		else
 		{
-			xi = xi - P / P2;
+			xi = xi - P / P2;//---> -polynome/polynomeDerive + racineTemp
 		}
+
 		Pverif = P * pow(10.0, 7.0);
 		Pverif2 = P * pow(10.0, 6.0);
 		if (Pverif < 0.0)
@@ -104,6 +111,8 @@ double Poly5::Newton(double polynome[6], int degree, double x0) {
 			xi = -x0;
 		}
 	} while ((Pverif > 1.0 && Pverif2 >= 0) && n < 100000);
+	//std::cout<<"P : "<<P<<std::endl;
+	//std::cout<<"P2 : "<<P2<<std::endl;
 	return xi;
 }
 
