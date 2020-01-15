@@ -74,6 +74,7 @@ void Poly4::ferrrari()
 	double B = ((pow(m_b / 2, 3)) / pow(m_a, 3)) - ((0.5 * m_c * m_b) / pow(m_a, 2)) + (m_d / m_a);
 	double C = (-3 * pow(m_b / (4 * m_a), 4)) + ((m_c * pow(m_b / 4, 2)) / pow(m_a, 3)) - ((0.25 * m_b * m_d) / pow(m_a, 2)) + (m_e / m_a);
 	
+
 	//Equation bicarree de la forme X^4+AX^2+C =0 avec X^2 = Y
 	if (B <= 1e-14 && B>= -1e-14) { // On arrondie autour de 0
 
@@ -123,7 +124,6 @@ void Poly4::ferrrari()
 		double z = B / (2 * uma);
 		double d1 = uma - 4 * (z * sqrt(uma) + u / 2);
 		double x1, x2, x3, x4 = 0;
-		//std::cout << "bs : " << bs << std::endl;
 		if (d1 >= 0) {
 			x1 = (sqrt(uma) + sqrt(d1)) / 2 - bs ;
 			x2 = (sqrt(uma) - sqrt(d1)) / 2 - bs ;
