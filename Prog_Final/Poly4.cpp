@@ -122,41 +122,19 @@ void Poly4::ferrrari()
 		double uma = u - A;
 		double z = B / (2 * uma);
 		double d1 = uma - 4 * (z * sqrt(uma) + u / 2);
-		double t1 = 0;
 		double x1, x2, x3, x4 = 0;
 		//std::cout << "bs : " << bs << std::endl;
 		if (d1 >= 0) {
 			x1 = (sqrt(uma) + sqrt(d1)) / 2 - bs ;
 			x2 = (sqrt(uma) - sqrt(d1)) / 2 - bs ;
-			
-			t1 = 1;
+			m_racine.push_back(x1);
+			m_racine.push_back(x2);
+
 		}
 		double d2 = uma - 4 * (-z * sqrt(uma) + u / 2);
-		double t2 = 0;
 		if (d2 >= 0) {
 			x3 = (-sqrt(uma) + sqrt(d2)) / 2 - bs ;
 			x4 = (-sqrt(uma) - sqrt(d2)) / 2 - bs ;
-			t2 = 1;
-		}
-		if (t1==0 && t2 == 0) { //On a pas de solution pour ce polynome
-			//std::cout << "\n!!Pas de solutions pour degre 4 !!\n" << std::endl;
-		}
-		if (t1 * t2 == 0 && (t1 == 1 || t2 ==1))
-		{
-			//Nous avons 2 solutions
-			if (t1 == 1) {
-				m_racine.push_back(x1);
-				m_racine.push_back(x2);
-			}
-			if (t2 == 1) {
-				m_racine.push_back(x3);
-				m_racine.push_back(x4);
-			}
-		} //Nous avons 4 solutions
-		else if (t1 ==1 && t2 ==1)
-		{
-			m_racine.push_back(x1);
-			m_racine.push_back(x2);
 			m_racine.push_back(x3);
 			m_racine.push_back(x4);
 		}
