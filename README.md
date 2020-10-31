@@ -1,2 +1,1 @@
-# ProjetMath3AEsirem
-distance min entre 2 racine est de 1/10
+# Solveur de polynôme de degré 1 à 5 par la méthode de Bernstein
