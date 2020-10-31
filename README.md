@@ -1,9 +1,21 @@
-# Solveur de polynôme de degré 1 à 5 par la méthode de Bernstein
 
-Ceci est un projet de math donné en 3A à l'ESIREM par notre professeur M.Garnier
+# Bernstein and usual methods to find polynomial real roots 
 
-L'objectif du projet et de crée un solveur avec la méthode de Berstein et de le comparer aux méthodes usuelles
+This is a math project given by M.Garnier for my 3rd year at the engineering school ESIREM
 
-Les informations pour compiler sont dans le dossier src (astuce: 'make' suffit)
+The objective was to solve polynomial from 2nd to 5th grade using usual methods and a Bernstein method, so we could compare the two of them.
 
-Les auteurs de ce programme sont WYDER Sevrin et ANQUETIN Romain
+The information to compile are in the folder "src" (trick : use the command 'make')
+
+The authors of this project are WYDER Sevrin and ANQUETIN Romain (https://github.com/Mortpo *big thank you to him*).
+
+#Examples :
+
+# 1.
+![ScreenShot](/img/image1.JPG?raw=true)
+
+# 2.
+![ScreenShot](/img/image2.JPG?raw=true)
+
+# 3.
+![ScreenShot](/img/image3.JPG?raw=true)
