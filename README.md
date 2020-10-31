@@ -12,10 +12,10 @@ The authors of this project are WYDER Sevrin and ANQUETIN Romain (https://github
 #Examples :
 
 # 1.
-![ScreenShot](/img/image1.JPG?raw=true)
+![ScreenShot](/img/image1.jpg)
 
 # 2.
-![ScreenShot](/img/image2.JPG?raw=true)
+![ScreenShot](/img/image2.jpg)
 
 # 3.
-![ScreenShot](/img/image3.JPG?raw=true)
+![ScreenShot](/img/image3.jpg)
