@@ -7,7 +7,7 @@ The objective was to solve polynomial from 2nd to 5th grade using usual methods 
 
 The information to compile are in the folder "src" (trick : use the command 'make')
 
-The authors of this project are WYDER Sevrin and ANQUETIN Romain (https://github.com/Mortpo *big thank you to him*).
+The authors of this project are WYDER Sevrin and ANQUETIN Romain (https://github.com/Mortpo *big thanks to him*).
 
 #Examples :
 
